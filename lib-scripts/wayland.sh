@@ -19,7 +19,7 @@ ninja -C build-host/ install
 CFLAGS=-I${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/libffi-3.2.1/include/ \
 meson build/ \
 	--cross-file "${TOOLCHAIN}/meson-cross.ini" \
-	--build.pkg-config-path "${TOOLCHAIN}/lib/x86_64-linux-gnu/pkgconfig" \
+	--build.pkg-config-path "${TOOLCHAIN}/lib/"*"/pkgconfig" \
 	--pkg-config-path "${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config" \
 	--default-library=shared \
 	--prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr" \
