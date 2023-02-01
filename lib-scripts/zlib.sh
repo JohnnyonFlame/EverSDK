@@ -16,3 +16,9 @@ export CXXFLAGS="-O2"
 	--shared
 
 make -j$(($(nproc)+1)) install
+
+./configure \
+	--prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr" \
+	--static
+
+make -j$(($(nproc)+1)) install
