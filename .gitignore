@@ -1,0 +1,4 @@
+toolchain/*
+out/*
+pkg/*
+*.tar.gz
