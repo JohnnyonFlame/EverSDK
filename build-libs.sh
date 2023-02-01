@@ -11,6 +11,7 @@
 ./lib-scripts/libmount.sh
 ./lib-scripts/libudev.sh
 ./lib-scripts/libxml2.sh
+./lib-scripts/wayland-protocols.sh
 ./lib-scripts/wayland.sh
 ./lib-scripts/sdl2.sh
 ./lib-scripts/sdl2_image.sh
