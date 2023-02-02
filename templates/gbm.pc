@@ -1,0 +1,11 @@
+prefix=TOOLCHAIN_PATH/arm-linux-gnueabihf/sysroot/usr
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+gbmbackendspath=TOOLCHAIN_PATH/arm-linux-gnueabihf/sysroot/usr/lib/gbm
+
+Name: gbm
+Description: Mali gbm library
+Version: VERSION
+Libs: -L${libdir} -lgbm
+Cflags: -I${includedir}
