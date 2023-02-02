@@ -11,7 +11,15 @@
 ./lib-scripts/libmount.sh
 ./lib-scripts/libudev.sh
 ./lib-scripts/libxml2.sh
+./lib-scripts/libpcre.sh
+./lib-scripts/glib.sh
+./lib-scripts/libogg.sh
+./lib-scripts/opus.sh
+./lib-scripts/opusfile.sh
+./lib-scripts/libmodplug.sh
+./lib-scripts/fluidsynth.sh
 ./lib-scripts/wayland-protocols.sh
 ./lib-scripts/wayland.sh
 ./lib-scripts/sdl2.sh
 ./lib-scripts/sdl2_image.sh
+./lib-scripts/sdl2_mixer.sh
