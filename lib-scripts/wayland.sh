@@ -28,3 +28,6 @@ meson build/ \
 	-Ddtd_validation=false
 
 ninja -C build/ install
+
+# Fix wayland-scanner detection on cross-compilation
+sed -i "s#bindir=\${prefix}/bin#bindir=${TOOLCHAIN}/bin#" ${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/wayland-scanner.pc
