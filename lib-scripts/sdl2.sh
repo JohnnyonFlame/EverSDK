@@ -2,8 +2,8 @@
 
 mkdir -p out/
 mkdir -p pkg/
-wget -nc https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.zip -O out/SDL2-2.26.2.zip || true
-(cd pkg/ && unzip -o ../out/SDL2-2.26.2.zip)
+wget -nc https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.tar.gz -O out/SDL2-2.26.2.tar.gz || true
+tar xf out/SDL2-2.26.2.tar.gz -C pkg/
 cd pkg/SDL2-2.26.2
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
