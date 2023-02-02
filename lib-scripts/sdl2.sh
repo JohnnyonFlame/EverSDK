@@ -23,7 +23,6 @@ export CXXFLAGS="-O2 -Wno-traditional"
     --disable-video-rpi \
     --disable-video-vulkan
 
-make clean
 make -j$(($(nproc)+1)) install
 
 sed 's:^exec_prefix=${prefix}:prefix="${prefix}/arm-linux-gnueabihf/sysroot/usr"\nexec_prefix=${prefix}:' sdl2-config > ${TOOLCHAIN}/bin/sdl2-config
