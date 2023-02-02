@@ -6,6 +6,7 @@ wget -nc https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2
 (cd pkg/ && unzip -o ../out/SDL2-2.26.2.zip)
 cd pkg/SDL2-2.26.2
 
+export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
 export CFLAGS="-O2 -Wno-traditional"
@@ -16,10 +17,10 @@ export CXXFLAGS="-O2 -Wno-traditional"
     --host="arm-linux-gnueabihf" \
     --enable-static \
     --enable-shared \
+    --enable-video-wayland \
     --enable-video-kmsdrm \
     --disable-video-x11 \
     --disable-video-rpi \
-    --disable-video-wayland \
     --disable-video-vulkan
 
 make clean
