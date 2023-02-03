@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 OUT=$(realpath "out/shell.tar.gz")
-mkdir -p out/tmp_shell/
+mkdir -p out/tmp_shell/tools
 cp -r redist/shell/* out/tmp_shell/
 ${TOOLCHAIN}/bin/arm-linux-gnueabihf-strip out/{dropbearmulti,sftp-server,avahi-daemon}
 cp out/{dropbearmulti,sftp-server,avahi-daemon,avahi-daemon.conf} out/tmp_shell/tools
