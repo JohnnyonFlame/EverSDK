@@ -4,9 +4,9 @@ WSI=wayland
 
 mkdir -p out/
 mkdir -p pkg/
-wget -nc https://github.com/JohnnyonFlame/libmali-jelos/archive/refs/heads/main.zip -O out/libmali.zip || true
-export FILES=(libmali-jelos-main/lib/arm-linux-gnueabihf/libmali-${MALI_VERSION}-${WSI}.so "libmali-jelos-main/include/*")
-(cd pkg/ && unzip -o ../out/libmali.zip "${FILES[@]}")
+wget -nc https://github.com/JohnnyonFlame/libmali-jelos/archive/refs/heads/main.tar.gz -O out/libmali.tar.gz || true
+export FILES=("libmali-jelos-main/include" libmali-jelos-main/lib/arm-linux-gnueabihf/libmali-${MALI_VERSION}-${WSI}.so)
+tar -C pkg/ -zxf out/libmali.tar.gz "${FILES[@]}"
 
 export PREFIX="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr"
 
