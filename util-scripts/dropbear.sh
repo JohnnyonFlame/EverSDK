@@ -4,7 +4,7 @@
 # elsewhere, and we need to point to a valid path to it using the SFTPSERVER_PATH
 # macro. See CFLAGS for this.
 
-INSTALL_DIR=$(pwd)/utils
+INSTALL_DIR=$(pwd)/out
 mkdir -p ${INSTALL_DIR}
 mkdir -p dl/
 mkdir -p pkg/

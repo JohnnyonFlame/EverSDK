@@ -1,8 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p utils/
-cp -r redist/shell redist/tmp_shell
-cp utils/{dropbearmulti,sftp-server,mdnsd} redist/tmp_shell/tools
-chmod +x redist/tmp_shell/special/shell.sh
-tar czf redist/shell.tar.gz redist/tmp_shell
-rm -rf redist/tmp_shell
+OUT=$(realpath "out/shell.tar.gz")
+mkdir -p out/tmp_shell/
+cp -r redist/shell/* out/tmp_shell/
+cp out/{dropbearmulti,sftp-server,mdnsd} out/tmp_shell/tools
+chmod +x out/tmp_shell/special/shell.sh
+(cd out/tmp_shell && tar -czf ${OUT} *)
+rm -rf out/tmp_shell

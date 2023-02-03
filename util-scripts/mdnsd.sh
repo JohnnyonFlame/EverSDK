@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-INSTALL_DIR=$(pwd)/utils
+INSTALL_DIR=$(pwd)/out
 mkdir -p ${INSTALL_DIR}
 mkdir -p dl/
 mkdir -p pkg/
