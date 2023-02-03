@@ -2,5 +2,5 @@
 
 ./util-scripts/dropbear.sh
 ./util-scripts/openssh.sh
-./util-scripts/mdnsd.sh
+./util-scripts/avahi.sh
 ./util-scripts/package-shell.sh

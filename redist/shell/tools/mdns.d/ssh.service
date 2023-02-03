@@ -1,4 +1,0 @@
-# mDNS-SD advertisement of SSH service
-name Cobalt
-type _ssh._tcp
-port 22

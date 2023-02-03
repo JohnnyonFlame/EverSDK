@@ -12,6 +12,7 @@
 ./lib-scripts/libudev.sh
 ./lib-scripts/libxml2.sh
 ./lib-scripts/libpcre.sh
+./lib-scripts/libdaemon.sh
 ./lib-scripts/glib.sh
 ./lib-scripts/libogg.sh
 ./lib-scripts/opus.sh

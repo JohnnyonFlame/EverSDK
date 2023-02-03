@@ -1,7 +1,7 @@
 #!/bin/sh -x
 
 DROPBEAR_ID="/mnt/sdcard/tools/.id_dropbear"
-MDNSD_CFG="/mnt/sdcard/tools/mdns.d/"
+AVAHI_CONF="/mnt/sdcard/tools/avahi-daemon.conf"
 MOUNT_SDCARD=$(mount | grep -r '^/dev/.* on /mnt/sdcard' | cut -d ' ' -f1)
 
 # jank fix for permissions...
@@ -14,7 +14,7 @@ ln -s /mnt/sdcard/tools/dropbearmulti /tmp/dropbearkey
 ln -s /mnt/sdcard/tools/dropbearmulti /tmp/dropbear
 ln -s /mnt/sdcard/tools/dropbearmulti /tmp/dbclient
 ln -s /mnt/sdcard/tools/sftp-server /tmp/sftp-server
-ln -s /mnt/sdcard/tools/mdnsd /tmp/mdnsd
+ln -s /mnt/sdcard/tools/avahi-daemon /tmp/avahi-daemon
 
 # Generate keys if needed
 if [[ ! -f "${DROPBEAR_ID}" ]]; then
@@ -24,4 +24,4 @@ fi
 # Run and wait for commands
 # killItWithFire
 /tmp/dropbear -r "${DROPBEAR_ID}" -F &
-/tmp/mdnsd "${MDNSD_CFG}" -i wlan0
+/tmp/avahi-daemon -D -f "${AVAHI_CONF}"
