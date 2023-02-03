@@ -1,0 +1,24 @@
+{
+    "romFileName": "shell",
+    "romCore": "UNKNOWN",
+    "romLaunchType": "NATIVE",
+    "romTitle": "Shell",
+    "romPlatform": "Evercade",
+    "romGenre": "Tools",
+    "romReleaseDate": "v1.0",
+    "romPlayers": 1,
+    "romDescription": "Shell Access.",
+    "romMapping": {
+        "a": "NULL",
+        "b": "NULL",
+        "x": "NULL",
+        "y": "NULL",
+        "dpad": "NULL",
+        "select": "NULL",
+        "start": "NULL",
+        "l1": "NULL",
+        "l2": "NULL",
+        "r1": "NULL",
+        "r2": "NULL"
+    }
+}

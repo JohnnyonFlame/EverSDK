@@ -4,3 +4,4 @@ export TOOLCHAIN=$(pwd)/toolchain
 ./build-toolchain.sh
 ./build-tools.sh
 ./build-libs.sh
+./build-utils.sh

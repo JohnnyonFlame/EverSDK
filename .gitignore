@@ -2,3 +2,6 @@ toolchain/*
 out/*
 pkg/*
 *.tar.gz
+utils/*
+redist/tmp_*
+redist/*.tar.gz
