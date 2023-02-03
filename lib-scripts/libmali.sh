@@ -2,11 +2,11 @@
 MALI_VERSION=utgard-450-r7p0
 WSI=wayland
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/JohnnyonFlame/libmali-jelos/archive/refs/heads/main.tar.gz -O out/libmali.tar.gz || true
+wget -nc https://github.com/JohnnyonFlame/libmali-jelos/archive/refs/heads/main.tar.gz -O dl/libmali.tar.gz || true
 export FILES=("libmali-jelos-main/include" libmali-jelos-main/lib/arm-linux-gnueabihf/libmali-${MALI_VERSION}-${WSI}.so)
-tar -C pkg/ -zxf out/libmali.tar.gz "${FILES[@]}"
+tar -C pkg/ -zxf dl/libmali.tar.gz "${FILES[@]}"
 
 export PREFIX="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr"
 

@@ -2,10 +2,10 @@
 
 INSTALL_DIR=$(pwd)/utils
 mkdir -p ${INSTALL_DIR}
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/openssh/openssh-portable/archive/refs/tags/V_9_2_P1.tar.gz -O out/openssh-V_9_2_P1.tar.gz || true
-tar xf out/openssh-V_9_2_P1.tar.gz -C pkg/
+wget -nc https://github.com/openssh/openssh-portable/archive/refs/tags/V_9_2_P1.tar.gz -O dl/openssh-V_9_2_P1.tar.gz || true
+tar xf dl/openssh-V_9_2_P1.tar.gz -C pkg/
 cd pkg/openssh-portable-V_9_2_P1
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"

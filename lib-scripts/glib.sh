@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://download.gnome.org/sources/glib/2.54/glib-2.54.2.tar.xz -O out/glib-2.54.2.tar.xz || true
-tar xf out/glib-2.54.2.tar.xz -C pkg/
+wget -nc https://download.gnome.org/sources/glib/2.54/glib-2.54.2.tar.xz -O dl/glib-2.54.2.tar.xz || true
+tar xf dl/glib-2.54.2.tar.xz -C pkg/
 cd pkg/glib-2.54.2
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"

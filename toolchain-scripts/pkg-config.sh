@@ -1,7 +1,9 @@
 #!/bin/bash -e
 
-wget -nc https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.2.tar.gz -O out/pkg-config-0.29.2.tar.gz || true
-tar xf out/pkg-config-0.29.2.tar.gz -C pkg/
+mkdir -p dl
+mkdir -p pkg
+wget -nc https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.2.tar.gz -O dl/pkg-config-0.29.2.tar.gz || true
+tar xf dl/pkg-config-0.29.2.tar.gz -C pkg/
 cd pkg/pkg-config-0.29.2
 
 ./configure \

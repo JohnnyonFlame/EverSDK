@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://www.zlib.net/zlib-1.2.13.tar.gz -O out/zlib-1.2.13.tar.gz || true
-tar xf out/zlib-1.2.13.tar.gz -C pkg/
+wget -nc https://www.zlib.net/zlib-1.2.13.tar.gz -O dl/zlib-1.2.13.tar.gz || true
+tar xf dl/zlib-1.2.13.tar.gz -C pkg/
 cd pkg/zlib-1.2.13
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"

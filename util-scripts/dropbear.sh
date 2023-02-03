@@ -6,10 +6,10 @@
 
 INSTALL_DIR=$(pwd)/utils
 mkdir -p ${INSTALL_DIR}
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://matt.ucc.asn.au/dropbear/releases/dropbear-2022.83.tar.bz2 -O out/dropbear-2022.83.tar.bz2 || true
-tar xf out/dropbear-2022.83.tar.bz2 -C pkg/
+wget -nc https://matt.ucc.asn.au/dropbear/releases/dropbear-2022.83.tar.bz2 -O dl/dropbear-2022.83.tar.bz2 || true
+tar xf dl/dropbear-2022.83.tar.bz2 -C pkg/
 cd pkg/dropbear-2022.83
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"

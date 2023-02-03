@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz -O out/util-linux-2.36.2.tar.xz || true
-tar xf out/util-linux-2.36.2.tar.xz -C pkg/
+wget -nc https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz -O dl/util-linux-2.36.2.tar.xz || true
+tar xf dl/util-linux-2.36.2.tar.xz -C pkg/
 cd pkg/util-linux-2.36.2
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"

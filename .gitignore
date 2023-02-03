@@ -1,5 +1,6 @@
 toolchain/*
 out/*
+dl/*
 pkg/*
 *.tar.gz
 utils/*

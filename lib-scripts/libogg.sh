@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.tar.gz -O out/libogg-1.3.5.tar.gz || true
-tar xf out/libogg-1.3.5.tar.gz -C pkg/
+wget -nc https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.tar.gz -O dl/libogg-1.3.5.tar.gz || true
+tar xf dl/libogg-1.3.5.tar.gz -C pkg/
 cd pkg/libogg-1.3.5
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"

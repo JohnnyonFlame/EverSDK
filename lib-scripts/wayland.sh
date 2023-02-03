@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://wayland.freedesktop.org/releases/wayland-1.18.0.tar.xz -O out/wayland-1.18.0.tar.xz || true
-tar xf out/wayland-1.18.0.tar.xz -C pkg/
+wget -nc https://wayland.freedesktop.org/releases/wayland-1.18.0.tar.xz -O dl/wayland-1.18.0.tar.xz || true
+tar xf dl/wayland-1.18.0.tar.xz -C pkg/
 cd pkg/wayland-1.18.0
 
 # Host bins (for wayland-scanner)

@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/libcap-2.49.tar.gz -O out/libcap-2.49.tar.gz || true
-tar xf out/libcap-2.49.tar.gz -C pkg/
+wget -nc https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/libcap-2.49.tar.gz -O dl/libcap-2.49.tar.gz || true
+tar xf dl/libcap-2.49.tar.gz -C pkg/
 cd pkg/libcap-2.49
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"

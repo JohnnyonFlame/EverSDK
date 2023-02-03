@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://wayland.freedesktop.org/releases/wayland-protocols-1.18.tar.xz -O out/wayland-protocols-1.18.tar.xz || true
-tar xf out/wayland-protocols-1.18.tar.xz -C pkg/
+wget -nc https://wayland.freedesktop.org/releases/wayland-protocols-1.18.tar.xz -O dl/wayland-protocols-1.18.tar.xz || true
+tar xf dl/wayland-protocols-1.18.tar.xz -C pkg/
 cd pkg/wayland-protocols-1.18
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"

@@ -2,10 +2,10 @@
 
 INSTALL_DIR=$(pwd)/utils
 mkdir -p ${INSTALL_DIR}
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/troglobit/mdnsd/releases/download/v0.12/mdnsd-0.12.tar.gz -O out/mdnsd-0.12.tar.gz || true
-tar xf out/mdnsd-0.12.tar.gz -C pkg/
+wget -nc https://github.com/troglobit/mdnsd/releases/download/v0.12/mdnsd-0.12.tar.gz -O dl/mdnsd-0.12.tar.gz || true
+tar xf dl/mdnsd-0.12.tar.gz -C pkg/
 cd pkg/mdnsd-0.12
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"

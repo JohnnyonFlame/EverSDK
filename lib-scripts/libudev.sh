@@ -1,10 +1,10 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://www.freedesktop.org/software/systemd/systemd-220.tar.xz -O out/systemd-220.tar.xz || true
+wget -nc https://www.freedesktop.org/software/systemd/systemd-220.tar.xz -O dl/systemd-220.tar.xz || true
 rm -rf pkg/systemd-220
-tar xf out/systemd-220.tar.xz -C pkg/
+tar xf dl/systemd-220.tar.xz -C pkg/
 cd pkg/systemd-220
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"

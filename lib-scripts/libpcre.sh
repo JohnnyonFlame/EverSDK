@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://sourceforge.net/projects/pcre/files/pcre/8.41/pcre-8.41.tar.bz2 -O out/pcre-8.41.tar.bz2 || true
-tar xf out/pcre-8.41.tar.bz2 -C pkg/
+wget -nc https://sourceforge.net/projects/pcre/files/pcre/8.41/pcre-8.41.tar.bz2 -O dl/pcre-8.41.tar.bz2 || true
+tar xf dl/pcre-8.41.tar.bz2 -C pkg/
 cd pkg/pcre-8.41
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"

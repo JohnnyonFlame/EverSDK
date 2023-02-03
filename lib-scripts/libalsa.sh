@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc ftp://ftp.alsa-project.org/pub/lib/alsa-lib-1.2.4.tar.bz2 -O out/alsa-lib-1.2.4.tar.bz2 || true
-tar xf out/alsa-lib-1.2.4.tar.bz2 -C pkg/
+wget -nc ftp://ftp.alsa-project.org/pub/lib/alsa-lib-1.2.4.tar.bz2 -O dl/alsa-lib-1.2.4.tar.bz2 || true
+tar xf dl/alsa-lib-1.2.4.tar.bz2 -C pkg/
 cd pkg/alsa-lib-1.2.4
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"

@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://dri.freedesktop.org/libdrm/libdrm-2.4.104.tar.xz -O out/libdrm-2.4.104.tar.xz || true
-tar xf out/libdrm-2.4.104.tar.xz -C pkg/
+wget -nc https://dri.freedesktop.org/libdrm/libdrm-2.4.104.tar.xz -O dl/libdrm-2.4.104.tar.xz || true
+tar xf dl/libdrm-2.4.104.tar.xz -C pkg/
 cd pkg/libdrm-2.4.104
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"

@@ -1,3 +1,4 @@
 #!/bin/bash -e
 
-tar zcvf eversdk.tar.gz *.sh *.md *-scripts/ templates/
+mkdir -p out/
+tar zcvf out/eversdk.tar.gz *.sh *.md *-scripts/ templates/

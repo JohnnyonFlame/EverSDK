@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-mkdir -p out/
+mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://xkbcommon.org/download/libxkbcommon-1.0.3.tar.xz -O out/libxkbcommon-1.0.3.tar.xz || true
-tar xf out/libxkbcommon-1.0.3.tar.xz -C pkg/
+wget -nc https://xkbcommon.org/download/libxkbcommon-1.0.3.tar.xz -O dl/libxkbcommon-1.0.3.tar.xz || true
+tar xf dl/libxkbcommon-1.0.3.tar.xz -C pkg/
 cd pkg/libxkbcommon-1.0.3
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
