@@ -11,8 +11,9 @@ cd pkg/avahi-0.8
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
-export CFLAGS="-Os"
-export CXXFLAGS="-Os"
+export CFLAGS="-Os -flto"
+export CXXFLAGS="-Os -flto"
+export LDFLAGS="-Os -flto"
 
 ./configure \
     --prefix="${INSTALL_DIR}" \
