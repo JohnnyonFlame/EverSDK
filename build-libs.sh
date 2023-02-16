@@ -20,8 +20,8 @@
 ./lib-scripts/libmodplug.sh
 ./lib-scripts/fluidsynth.sh
 ./lib-scripts/icu4c.sh
-./lib-scripts/wayland.sh
 ./lib-scripts/libfreetype.sh
+./lib-scripts/wayland.sh
 ./lib-scripts/wayland-protocols.sh
 ./lib-scripts/sdl2.sh
 ./lib-scripts/sdl2_image.sh
