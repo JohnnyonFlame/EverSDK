@@ -14,7 +14,7 @@ WITH_CROSS_BUILD=$(realpath "pkg/host/icu/source")
         --prefix="${TOOLCHAIN}" \
         --enable-static \
         --disable-shared \
-        --enable-extras=yes \
+        --enable-extras=no \
         --enable-strict=no \
         --enable-tests=no \
         --disable-renaming \
@@ -39,7 +39,11 @@ WITH_CROSS_BUILD=$(realpath "pkg/host/icu/source")
         --prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot" \
         --host="arm-linux-gnueabihf" \
         --enable-static \
-        --enable-shared
+        --enable-shared \
+        --enable-extras=no \
+        --enable-strict=no \
+        --disable-dyload \
+        --with-data-packaging=archive
 
     make clean
     make -j$(($(nproc)+1)) install
