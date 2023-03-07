@@ -1,12 +1,18 @@
-#!/bin/sh -x
-
+#!/bin/bash -e
 DROPBEAR_ID="/mnt/sdcard/tools/.id_dropbear"
 AVAHI_CONF="/mnt/sdcard/tools/avahi-daemon.conf"
-MOUNT_SDCARD=$(mount | grep -r '^/dev/.* on /mnt/sdcard' | cut -d ' ' -f1)
 
 # jank fix for permissions...
-umount "${MOUNT_SDCARD}"
-mount -o rw,umask=000,noatime,nodiratime "${MOUNT_SDCARD}" /mnt/sdcard
+for i in /mnt/*; do
+	DEVNAME=$(mountpoint -n "$i" | cut -d ' ' -f1)
+	FSTYPE=$(mount | grep "^$DEVNAME on " | cut -d ' ' -f5)
+	# Ignore non-fat filesystems
+	[[ "$FSTYPE" == "vfat" ]] || continue
+
+	# Remount with umask=000, so everything always have executable flags
+	umount "$i"
+	mount -o rw,umask=000,noatime,nodiratime "${DEVNAME}" "$i"
+done
 
 # Setup
 ln -s /mnt/sdcard/tools/dropbearmulti /tmp/scp
