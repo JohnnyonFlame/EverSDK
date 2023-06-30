@@ -1,7 +1,9 @@
 #!/bin/bash -e
 
+INSTALL_DIR=$(pwd)/out
 mkdir -p dl/
 mkdir -p pkg/
+mkdir -p out/
 wget -nc https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.tar.gz -O dl/SDL2-2.26.2.tar.gz || true
 tar xf dl/SDL2-2.26.2.tar.gz -C pkg/
 cp lib-scripts/SDL2_evercade_controller.patch pkg/SDL2-2.26.2/SDL2_evercade_controller.patch
@@ -30,3 +32,4 @@ make -j$(($(nproc)+1)) install
 
 sed 's:^exec_prefix=${prefix}:prefix="${prefix}/arm-linux-gnueabihf/sysroot/usr"\nexec_prefix=${prefix}:' sdl2-config > ${TOOLCHAIN}/bin/sdl2-config
 chmod +x ${TOOLCHAIN}/bin/sdl2-config
+cp "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/libSDL2-2.0.so.0.2600.2" "${INSTALL_DIR}/libSDL2-2.0.so.0"
