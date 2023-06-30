@@ -1,0 +1,27 @@
+diff -r -u --color SDL2-2.26.2/src/joystick/SDL_gamecontroller.c SDL2-2.26.2-orig/src/joystick/SDL_gamecontroller.c
+--- SDL2-2.26.2/src/joystick/SDL_gamecontroller.c	2023-01-03 14:54:46.000000000 +0000
++++ SDL2-2.26.2-orig/src/joystick/SDL_gamecontroller.c	2023-06-29 07:58:54.063900141 +0000
+@@ -2001,7 +2001,12 @@
+     Uint16 version;
+     Uint32 vidpid;
+ 
++
+ #if defined(__LINUX__)
++    if (SDL_endswith(name, "adc-pot")) {
++        return SDL_TRUE;
++    }
++
+     if (SDL_endswith(name, " Motion Sensors")) {
+         /* Don't treat the PS3 and PS4 motion controls as a separate game controller */
+         return SDL_TRUE;
+diff -r -u --color SDL2-2.26.2/src/joystick/SDL_gamecontrollerdb.h SDL2-2.26.2-orig/src/joystick/SDL_gamecontrollerdb.h
+--- SDL2-2.26.2/src/joystick/SDL_gamecontrollerdb.h	2023-01-03 14:54:46.000000000 +0000
++++ SDL2-2.26.2-orig/src/joystick/SDL_gamecontrollerdb.h	2023-06-30 06:53:20.016395764 +0000
+@@ -519,6 +519,7 @@
+ #endif
+ #if SDL_JOYSTICK_LINUX
+     "xinput,*,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b8,leftshoulder:b4,leftstick:b9,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b10,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,",
++    "19002e570100000001000000000100,zpio-keys,a:b4,b:b7,back:b8,dpdown:b12,dpleft:b10,dpright:b11,dpup:b9,leftshoulder:b5,rightshoulder:b1,start:b3,x:b6,y:b2,",
+     "03000000c82d00000090000011010000,8BitDo FC30 Pro,a:b0,b:b1,back:b10,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,leftshoulder:b6,leftstick:b13,lefttrigger:a4,leftx:a0,lefty:a1,rightshoulder:b7,rightstick:b14,righttrigger:a5,rightx:a2,righty:a3,start:b11,x:b3,y:b4,hint:SDL_GAMECONTROLLER_USE_BUTTON_LABELS:=1,",
+     "03000000c82d00000090000011010000,8BitDo FC30 Pro,a:b1,b:b0,back:b10,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,leftshoulder:b6,leftstick:b13,lefttrigger:a4,leftx:a0,lefty:a1,rightshoulder:b7,rightstick:b14,righttrigger:a5,rightx:a2,righty:a3,start:b11,x:b4,y:b3,hint:!SDL_GAMECONTROLLER_USE_BUTTON_LABELS:=1,",
+     "05000000c82d00001038000000010000,8BitDo FC30 Pro,a:b0,b:b1,back:b10,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,leftshoulder:b6,leftstick:b13,lefttrigger:a5,leftx:a0,lefty:a1,rightshoulder:b7,rightstick:b14,righttrigger:a4,rightx:a2,righty:a3,start:b11,x:b3,y:b4,hint:SDL_GAMECONTROLLER_USE_BUTTON_LABELS:=1,",

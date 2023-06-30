@@ -4,6 +4,7 @@ mkdir -p dl/
 mkdir -p pkg/
 wget -nc https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.tar.gz -O dl/SDL2-2.26.2.tar.gz || true
 tar xf dl/SDL2-2.26.2.tar.gz -C pkg/
+cp lib-scripts/SDL2_evercade_controller.patch pkg/SDL2-2.26.2/SDL2_evercade_controller.patch
 cd pkg/SDL2-2.26.2
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
@@ -13,6 +14,7 @@ export CFLAGS="-Os -Wno-traditional"
 export CXXFLAGS="-Os -Wno-traditional"
 export LDFLAGS="-Os -flto"
 
+patch -p1 < SDL2_evercade_controller.patch
 ./configure \
     --prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr" \
     --host="arm-linux-gnueabihf" \
