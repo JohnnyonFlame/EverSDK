@@ -1,0 +1,13 @@
+--- pkg/parted-3.6/parted/parted.c	2023-03-25 00:02:17.000000000 +0000
++++ parted.c	2023-06-28 14:41:25.061008707 +0000
+@@ -69,6 +69,10 @@
+ /* minimum amount of free space to leave, or maximum amount to gobble up */
+ #define MIN_FREESPACE           (1000 * 2)      /* 1000k */
+ 
++#ifndef UUID_STR_LEN
++#define UUID_STR_LEN 37
++#endif
++
+ static int MEGABYTE_SECTORS (PedDevice* dev)
+ {
+         return PED_MEGABYTE_SIZE / dev->sector_size;
