@@ -7,7 +7,7 @@ This repo contains a list of scripts, templates and tools to generate a working 
 Different systems might require a host of tools to get a build working, in ubuntu you might want:
 
 ```bash
-sudo apt install -y git build-essential autoconf ninja-build meson cmake bison flex gawk gettext g++ help2man libncurses-dev libtool-bin texinfo unzip libffi-dev libexpat-dev patchelf gperf intltool
+sudo apt install -y git build-essential golang autoconf ninja-build meson cmake bison flex gawk gettext g++ help2man libncurses-dev libtool-bin texinfo unzip libffi-dev libexpat-dev patchelf gperf intltool
 ```
 
 ### How to build it?
