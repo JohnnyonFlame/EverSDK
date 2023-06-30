@@ -8,8 +8,9 @@ cd pkg/libdrm-2.4.104
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
-export CFLAGS="-O2"
-export CXXFLAGS="-O2"
+export CFLAGS="-Os"
+export CXXFLAGS="-Os"
+export LDFLAGS="-Os -flto"
 
 meson build/ \
 	--cross-file "${TOOLCHAIN}/meson-cross.ini" \

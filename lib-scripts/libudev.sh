@@ -9,8 +9,9 @@ cd pkg/systemd-220
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
-export CFLAGS="-O2 -Wno-traditional"
-export CXXFLAGS="-O2 -Wno-traditional"
+export CFLAGS="-Os -Wno-traditional"
+export CXXFLAGS="-Os -Wno-traditional"
+export LDFLAGS="-Os -flto"
 
 # Ugly compilation fixes...
 sed -i 's#if test "${with_efi_ldsdir+set}" = set; then :#if false; then\nif test "${with_efi_ldsdir+set}" = set; then :#' configure

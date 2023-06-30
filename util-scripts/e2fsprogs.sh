@@ -13,7 +13,7 @@ export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
 export CFLAGS="-Os -flto"
 export CFLAGS="${CFLAGS}"
 export CXXFLAGS="${CFLAGS}"
-export LDFLAGS="-flto"
+export LDFLAGS="-Os -flto"
 
 ./configure \
     --prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr" \

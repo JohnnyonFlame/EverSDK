@@ -18,7 +18,7 @@ export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
 export CFLAGS="-Os -flto -DSFTPSERVER_PATH='\"/tmp/sftp-server\"' -DDROPBEAR_PATH_SSH_PROGRAM='\"/tmp/dbclient\"'"
 export CFLAGS="${CFLAGS} -DDEFAULT_PATH='\"/usr/bin:/bin:/tmp\"' -DDEFAULT_ROOT_PATH='\"/usr/sbin:/usr/bin:/sbin:/bin:/tmp\"'"
 export CXXFLAGS="${CFLAGS}"
-export LDFLAGS="-flto"
+export LDFLAGS="-Os -flto"
 
 ./configure \
     --prefix="${INSTALL_DIR}" \

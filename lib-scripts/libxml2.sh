@@ -9,8 +9,9 @@ cd pkg/libxml2-2.9.7
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
-export CFLAGS="-O2"
-export CXXFLAGS="-O2"
+export CFLAGS="-Os"
+export CXXFLAGS="-Os"
+export LDFLAGS="-Os -flto"
 
 ./configure \
 	--with-python=no \

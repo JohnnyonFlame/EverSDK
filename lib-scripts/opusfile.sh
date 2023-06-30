@@ -9,8 +9,9 @@ cd pkg/opusfile-0.12
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
-export CFLAGS="-O2 -Wno-traditional"
-export CXXFLAGS="-O2 -Wno-traditional"
+export CFLAGS="-Os -Wno-traditional"
+export CXXFLAGS="-Os -Wno-traditional"
+export LDFLAGS="-Os -flto"
 
 ./configure \
     --prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr" \

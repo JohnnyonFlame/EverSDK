@@ -15,7 +15,7 @@ export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
 export CFLAGS="-Os -flto"
 export CFLAGS="${CFLAGS}"
 export CXXFLAGS="${CFLAGS}"
-export LDFLAGS="-flto"
+export LDFLAGS="-Os -s -flto"
 
 patch -p2 < 0001-parted.patch
 ./configure \

@@ -33,6 +33,7 @@ WITH_CROSS_BUILD=$(realpath "pkg/host/icu/source")
     export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
     export CFLAGS="-Os"
     export CXXFLAGS="-Os"
+    export LDFLAGS="-Os -flto"
 
     ./configure \
         --with-cross-build="${WITH_CROSS_BUILD}" \
