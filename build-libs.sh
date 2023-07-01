@@ -14,6 +14,7 @@
 ./lib-scripts/libpcre.sh
 ./lib-scripts/libdaemon.sh
 ./lib-scripts/glib.sh
+./lib-scripts/libbz2.sh
 ./lib-scripts/libogg.sh
 ./lib-scripts/opus.sh
 ./lib-scripts/opusfile.sh
