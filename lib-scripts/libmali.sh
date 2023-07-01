@@ -26,6 +26,7 @@ ln -sf ${PREFIX}/lib/libmali-${MALI_VERSION}-${WSI}.so ${PREFIX}/lib/libgbm.so.1
 ln -sf ${PREFIX}/lib/libmali-${MALI_VERSION}-${WSI}.so ${PREFIX}/lib/libgbm.so.1.9.0
 ln -sf ${PREFIX}/lib/libmali-${MALI_VERSION}-${WSI}.so ${PREFIX}/lib/libmali.so
 cp -r pkg/libmali-jelos-main/include/{EGL,GLES,GLES2,KHR} ${PREFIX}/include
+cp -r pkg/libmali-jelos-main/include/KHR/mali_khrplatform.h ${PREFIX}/include/KHR/khrplatform.h
 cp -r pkg/libmali-jelos-main/include/GBM/* ${PREFIX}/include/
 
 # Fix libmali.so.1 missing on Evercade VS
