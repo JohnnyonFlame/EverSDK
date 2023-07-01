@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 OUT=$(realpath "out/gdb.tar.gz")
 mkdir -p out/gdb_tmp/tools

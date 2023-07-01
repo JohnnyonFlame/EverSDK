@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 INSTALL_DIR=$(pwd)/out
 mkdir -p dl/
