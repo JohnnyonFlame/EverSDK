@@ -6,6 +6,7 @@
 ./lib-scripts/libxkbcommon.sh
 ./lib-scripts/libexpat.sh
 ./lib-scripts/zlib.sh
+./lib-scripts/liblzma.sh
 ./lib-scripts/libmali.sh
 ./lib-scripts/libcap.sh
 ./lib-scripts/libmount.sh
