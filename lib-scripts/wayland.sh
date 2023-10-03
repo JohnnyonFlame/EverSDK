@@ -1,33 +1,49 @@
 #!/bin/bash -e
 
 mkdir -p dl/
-mkdir -p pkg/
-wget -nc https://wayland.freedesktop.org/releases/wayland-1.18.0.tar.xz -O dl/wayland-1.18.0.tar.xz || true
-tar xf dl/wayland-1.18.0.tar.xz -C pkg/
-cd pkg/wayland-1.18.0
+mkdir -p pkg/host pkg/target
+wget -nc https://wayland.freedesktop.org/releases/wayland-1.14.0.tar.xz -O dl/wayland-1.14.0.tar.xz || true
+tar xf dl/wayland-1.14.0.tar.xz -C pkg/host
+tar xf dl/wayland-1.14.0.tar.xz -C pkg/target
 
-# Host bins (for wayland-scanner)
-meson build-host/ \
-    --prefix="${TOOLCHAIN}" \
-	-Ddocumentation=false \
-	-Ddtd_validation=false
-	
-ninja -C build-host/ install
+(
+    cd pkg/host/wayland-1.14.0
 
+    ./configure \
+        --prefix="${TOOLCHAIN}" \
+        --disable-dependency-tracking \
+		--disable-dtd-validation \
+		--disable-documentation \
+		--disable-libraries
 
-# Root bins, specify libffi-3.2.1 include path to avoid odd breakage
-CFLAGS=-I${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/libffi-3.2.1/include/ \
-meson build/ \
-	--cross-file "${TOOLCHAIN}/meson-cross.ini" \
-	--build.pkg-config-path "${TOOLCHAIN}/lib/"*"/pkgconfig" \
-	--pkg-config-path "${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config" \
-	--default-library=shared \
-	--prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr" \
-	--buildtype=release \
-	-Ddocumentation=false \
-	-Ddtd_validation=false
+	make clean
+    make -j$(($(nproc)+1)) install
+)
 
-ninja -C build/ install
+(
+    cd pkg/target/wayland-1.14.0
+    
+	export PATH="${TOOLCHAIN}/bin/:$PATH"
+    export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
+    export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
+    export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
+    export CFLAGS="-Os -ffunction-sections -fdata-sections"
+    export CXXFLAGS="-Os -ffunction-sections -fdata-sections"
+    export LDFLAGS="-Os -flto"
 
-# Fix wayland-scanner detection on cross-compilation
-sed -i "s#bindir=\${prefix}/bin#bindir=${TOOLCHAIN}/bin#" ${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/wayland-scanner.pc
+    ./configure \
+        --prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr" \
+        --host="arm-linux-gnueabihf" \
+        --enable-static \
+        --enable-shared \
+		--disable-dtd-validation \
+		--disable-documentation \
+		--with-host-scanner
+
+	make clean
+    make -j$(($(nproc)+1)) install
+)
+
+cp templates/wayland-egl.pc ${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/wayland-egl.pc
+sed -i "s#TOOLCHAIN_PATH#${TOOLCHAIN}#" ${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/wayland-egl.pc
+sed -i "s#exec_prefix=\${prefix}#exec_prefix=${TOOLCHAIN}#" ${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/wayland-scanner.pc

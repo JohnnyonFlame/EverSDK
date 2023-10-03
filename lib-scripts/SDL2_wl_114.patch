@@ -1,0 +1,91 @@
+diff -ruN SDL2-2.26.2/src/video/wayland/SDL_waylandvideo.c SDL2-2.26.2_new/src/video/wayland/SDL_waylandvideo.c
+--- SDL2-2.26.2/src/video/wayland/SDL_waylandvideo.c	2023-01-03 14:54:46.000000000 +0000
++++ SDL2-2.26.2_new/src/video/wayland/SDL_waylandvideo.c	2023-10-03 01:27:02.001540018 +0000
+@@ -135,29 +135,6 @@
+     return SDL_strdup("SDL_App");
+ }
+ 
+-static const char *SDL_WAYLAND_surface_tag = "sdl-window";
+-static const char *SDL_WAYLAND_output_tag = "sdl-output";
+-
+-void SDL_WAYLAND_register_surface(struct wl_surface *surface)
+-{
+-    wl_proxy_set_tag((struct wl_proxy *)surface, &SDL_WAYLAND_surface_tag);
+-}
+-
+-void SDL_WAYLAND_register_output(struct wl_output *output)
+-{
+-    wl_proxy_set_tag((struct wl_proxy *)output, &SDL_WAYLAND_output_tag);
+-}
+-
+-SDL_bool SDL_WAYLAND_own_surface(struct wl_surface *surface)
+-{
+-    return wl_proxy_get_tag((struct wl_proxy *) surface) == &SDL_WAYLAND_surface_tag;
+-}
+-
+-SDL_bool SDL_WAYLAND_own_output(struct wl_output *output)
+-{
+-    return wl_proxy_get_tag((struct wl_proxy *) output) == &SDL_WAYLAND_output_tag;
+-}
+-
+ static void
+ Wayland_DeleteDevice(SDL_VideoDevice *device)
+ {
+@@ -718,7 +695,7 @@
+     data->index = -1;
+ 
+     wl_output_add_listener(output, &output_listener, data);
+-    SDL_WAYLAND_register_output(output);
++    // SDL_WAYLAND_register_output(output);
+ 
+     /* Keep a list of outputs for deferred xdg-output initialization. */
+     if (d->output_list != NULL) {
+diff -ruN SDL2-2.26.2/src/video/wayland/SDL_waylandvideo.h SDL2-2.26.2_new/src/video/wayland/SDL_waylandvideo.h
+--- SDL2-2.26.2/src/video/wayland/SDL_waylandvideo.h	2023-01-03 14:54:46.000000000 +0000
++++ SDL2-2.26.2_new/src/video/wayland/SDL_waylandvideo.h	2023-10-03 01:09:07.601936217 +0000
+@@ -119,11 +119,6 @@
+ /* Needed here to get wl_surface declaration, fixes GitHub#4594 */
+ #include "SDL_waylanddyn.h"
+ 
+-extern void SDL_WAYLAND_register_surface(struct wl_surface *surface);
+-extern void SDL_WAYLAND_register_output(struct wl_output *output);
+-extern SDL_bool SDL_WAYLAND_own_surface(struct wl_surface *surface);
+-extern SDL_bool SDL_WAYLAND_own_output(struct wl_output *output);
+-
+ extern SDL_bool Wayland_LoadLibdecor(SDL_VideoData *data, SDL_bool ignore_xdg);
+ 
+ extern SDL_bool Wayland_VideoReconnect(_THIS);
+diff -ruN SDL2-2.26.2/src/video/wayland/SDL_waylandwindow.c SDL2-2.26.2_new/src/video/wayland/SDL_waylandwindow.c
+--- SDL2-2.26.2/src/video/wayland/SDL_waylandwindow.c	2023-01-03 14:54:46.000000000 +0000
++++ SDL2-2.26.2_new/src/video/wayland/SDL_waylandwindow.c	2023-10-03 01:10:37.724829632 +0000
+@@ -1096,10 +1096,6 @@
+     SDL_WindowData *window = data;
+     SDL_WaylandOutputData *driverdata = wl_output_get_user_data(output);
+ 
+-    if (!SDL_WAYLAND_own_output(output) || !SDL_WAYLAND_own_surface(surface)) {
+-        return;
+-    }
+-
+     window->outputs = SDL_realloc(window->outputs,
+                                   sizeof(SDL_WaylandOutputData*) * (window->num_outputs + 1));
+     window->outputs[window->num_outputs++] = driverdata;
+@@ -1117,10 +1113,6 @@
+     int i, send_move_event = 0;
+     SDL_WaylandOutputData *driverdata = wl_output_get_user_data(output);
+ 
+-    if (!SDL_WAYLAND_own_output(output) || !SDL_WAYLAND_own_surface(surface)) {
+-        return;
+-    }
+-
+     for (i = 0; i < window->num_outputs; i++) {
+         if (window->outputs[i] == driverdata) {  /* remove this one */
+             if (i == (window->num_outputs-1)) {
+@@ -2001,8 +1993,6 @@
+         wl_compositor_create_surface(c->compositor);
+     wl_surface_add_listener(data->surface, &surface_listener, data);
+ 
+-    SDL_WAYLAND_register_surface(data->surface);
+-
+     /* Must be called before EGL configuration to set the drawable backbuffer size. */
+     ConfigureWindowGeometry(window);
+ 
