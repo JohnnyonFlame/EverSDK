@@ -1,11 +1,11 @@
 #!/bin/bash -e
 
 mkdir -p dl/ pkg/ ${TOOLCHAIN}
-wget http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.25.0.tar.bz2 -O dl/crosstool-ng-1.25.0.tar.bz2 || true
-tar xf dl/crosstool-ng-1.25.0.tar.bz2 -C pkg/
-sed -E "s:CT_PREFIX_DIR=\"(.*)\":CT_PREFIX_DIR=\"${TOOLCHAIN}\":" templates/crosstool-config > pkg/crosstool-ng-1.25.0/.config
+wget http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.26.0.tar.xz -O dl/crosstool-ng-1.26.0.tar.xz || true
+tar xf dl/crosstool-ng-1.26.0.tar.xz -C pkg/
+sed -E "s:CT_PREFIX_DIR=\"(.*)\":CT_PREFIX_DIR=\"${TOOLCHAIN}\":" templates/crosstool-config > pkg/crosstool-ng-1.26.0/.config
 
-cd pkg/crosstool-ng-1.25.0
+cd pkg/crosstool-ng-1.26.0
 ./configure --enable-local
 make -j$(($(nproc)+1))
 ./ct-ng build
