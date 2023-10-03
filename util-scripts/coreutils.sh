@@ -9,10 +9,9 @@ tar xf dl/coreutils-9.3.tar.xz -C pkg/
 cd pkg/coreutils-9.3
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
-export CFLAGS="-Os -flto"
-export CFLAGS="${CFLAGS}"
+export CFLAGS="-Os -flto -ffunction-sections -fdata-sections"
 export CXXFLAGS="${CFLAGS}"
-export LDFLAGS="-Os -s -flto"
+export LDFLAGS="-Os -s -flto -Wl,--gc-sections"
 
 ./configure \
     --host="arm-linux-gnueabihf" \

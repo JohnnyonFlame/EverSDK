@@ -10,3 +10,4 @@
 ./util-scripts/libarchive.sh
 ./util-scripts/package-shell.sh
 ./util-scripts/package-gdb.sh
+./util-scripts/coreutils.sh
