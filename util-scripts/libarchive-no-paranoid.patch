@@ -1,0 +1,20 @@
+diff -ru libarchive-3.6.2/libarchive/archive_write_disk_posix.c libarchive-3.6.2_mod/libarchive/archive_write_disk_posix.c
+--- libarchive-3.6.2/libarchive/archive_write_disk_posix.c	2022-12-09 13:38:31.000000000 +0000
++++ libarchive-3.6.2_mod/libarchive/archive_write_disk_posix.c	2023-10-02 19:12:05.238875416 +0000
+@@ -3474,11 +3474,15 @@
+ 		return (ARCHIVE_OK);
+ 	}
+ #endif
+-
++#if 0
+ 	archive_set_error(&a->archive, errno,
+ 	    "Can't set user=%jd/group=%jd for %s",
+ 	    (intmax_t)a->uid, (intmax_t)a->gid, a->name);
+ 	return (ARCHIVE_WARN);
++#else
++	// Don't be paranoid, if it didn't fail, assume it worked.
++	return (ARCHIVE_OK);
++#endif
+ }
+ 
+ /*
