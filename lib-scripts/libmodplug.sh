@@ -9,8 +9,8 @@ cd pkg/libmodplug-0.8.9.0
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
-export CFLAGS="-Os -Wno-traditional"
-export CXXFLAGS="-Os -Wno-traditional"
+export CFLAGS="-Os -Wno-traditional -ffunction-sections -fdata-sections"
+export CXXFLAGS="-Os -Wno-traditional -ffunction-sections -fdata-sections"
 export LDFLAGS="-Os -flto"
 
 ./configure \

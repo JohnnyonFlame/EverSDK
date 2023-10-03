@@ -9,8 +9,8 @@ cd pkg/opus-1.1.2
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
-export CFLAGS="-Os -Wno-traditional"
-export CXXFLAGS="-Os -Wno-traditional"
+export CFLAGS="-Os -ffunction-sections -fdata-sections -Wno-traditional"
+export CXXFLAGS="-Os -ffunction-sections -fdata-sections -Wno-traditional"
 export LDFLAGS="-Os -flto"
 
 ./configure \

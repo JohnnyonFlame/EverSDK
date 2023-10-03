@@ -31,8 +31,8 @@ WITH_CROSS_BUILD=$(realpath "pkg/host/icu/source")
     export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
     export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
     export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
-    export CFLAGS="-Os"
-    export CXXFLAGS="-Os"
+    export CFLAGS="-Os -ffunction-sections -fdata-sections"
+    export CXXFLAGS="-Os -ffunction-sections -fdata-sections"
     export LDFLAGS="-Os -flto"
 
     ./configure \

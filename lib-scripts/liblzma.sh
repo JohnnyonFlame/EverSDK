@@ -8,8 +8,8 @@ cd pkg/xz-5.4.3
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
-export CFLAGS="-Os"
-export CXXFLAGS="-Os"
+export CFLAGS="-Os -ffunction-sections -fdata-sections"
+export CXXFLAGS="-Os -ffunction-sections -fdata-sections"
 export LDFLAGS="-Os -flto"
 
 ./configure \
