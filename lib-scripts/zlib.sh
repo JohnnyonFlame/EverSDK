@@ -2,9 +2,9 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://www.zlib.net/zlib-1.2.13.tar.gz -O dl/zlib-1.2.13.tar.gz || true
-tar xf dl/zlib-1.2.13.tar.gz -C pkg/
-cd pkg/zlib-1.2.13
+wget -nc https://www.zlib.net/fossils/zlib-1.3.tar.gz -O dl/zlib-1.3.tar.gz || true
+tar xf dl/zlib-1.3.tar.gz -C pkg/
+cd pkg/zlib-1.3
 
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"
 export CXX="${TOOLCHAIN}/bin/arm-linux-gnueabihf-g++"
