@@ -22,7 +22,7 @@ cd eversdk
 - On Google Colab:
 ```py
 !sudo apt install -yy git build-essential autoconf ninja-build meson cmake bison flex gawk gettext g++ help2man libncurses-dev libtool-bin texinfo unzip libffi-dev libexpat-dev patchelf gperf intltool golang
-!git clone https://github.com/JohnnyonFlame/EverSDK -b eversdk_handheld
+!git clone https://github.com/JohnnyonFlame/EverSDK
 !echo "CT_EXPERIMENTAL=y" >> EverSDK/templates/crosstool-config
 !echo "CT_ALLOW_BUILD_AS_ROOT=y" >> EverSDK/templates/crosstool-config
 !echo "CT_ALLOW_BUILD_AS_ROOT_SURE=y" >> EverSDK/templates/crosstool-config
