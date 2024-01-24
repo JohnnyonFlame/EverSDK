@@ -30,3 +30,4 @@
 ./lib-scripts/sdl2.sh
 ./lib-scripts/sdl2_image.sh
 ./lib-scripts/sdl2_mixer.sh
+./lib-scripts/sdl2_net.sh
