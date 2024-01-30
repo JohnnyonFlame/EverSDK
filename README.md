@@ -34,6 +34,15 @@ cd eversdk
 !tar -czf EverSDK.tar.gz EverSDK/
 ```
 
+### On deploying and debugging.
+
+The `out/shell.tar.gz` package will be built once the compilation process is finished,
+that contains a series of applications and tools to allow you to remotely deploy and
+debug homebrew with ease on your Evercade VS with an EverSD.
+
+To use this, extract the package on your EverSD, run the Shell application and you'll
+be able to ssh/scp into `root@cobalt` with the password `eversdk`.
+
 ### How do I use this?
 
 You can use this to build a variety of different project types, the building scripts are kept straightforward with the sake of serving as a quick reference, such as [building with go](util-scripts/gojq.sh), [GNU Configure](util-scripts/parted.sh) and [Meson](lib-scripts/libfreetype.sh).

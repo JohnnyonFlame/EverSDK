@@ -20,6 +20,11 @@ export CFLAGS="${CFLAGS} -DDEFAULT_PATH='\"/usr/bin:/bin:/tmp\"' -DDEFAULT_ROOT_
 export CXXFLAGS="${CFLAGS}"
 export LDFLAGS="-Os -flto"
 
+# -- THIS IS EVIL --
+# Terrible hack to force the password to be "eversdk" for every user
+# You can create your own hash with: `openssl passwd -5 -salt vs new_password_goes_here`
+sed -i 's/ses.authstate.pw_passwd = m_strdup(passwd_crypt);/ses.authstate.pw_passwd = m_strdup("$5$vs$jWTiufyRtfALzG0xwG0PiEiuxvEnIbzXA8ekIseqX06");/g' common-session.c
+
 ./configure \
     --prefix="${INSTALL_DIR}" \
     --host="arm-linux-gnueabihf" \
