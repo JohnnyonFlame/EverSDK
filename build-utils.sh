@@ -3,6 +3,7 @@
 ./util-scripts/dropbear.sh
 ./util-scripts/openssh.sh
 ./util-scripts/avahi.sh
+./util-scripts/android-tools.sh
 ./util-scripts/jq.sh
 ./util-scripts/e2fsprogs.sh
 ./util-scripts/gojq.sh
