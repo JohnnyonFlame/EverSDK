@@ -28,6 +28,7 @@
 ./lib-scripts/wayland.sh
 ./lib-scripts/wayland-protocols.sh
 ./lib-scripts/openal-soft.sh
+./lib-scripts/librga.sh
 ./lib-scripts/sdl2.sh
 ./lib-scripts/sdl2_image.sh
 ./lib-scripts/sdl2_mixer.sh
