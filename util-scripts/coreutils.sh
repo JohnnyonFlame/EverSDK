@@ -25,3 +25,4 @@ export LDFLAGS="-Os -s -flto -Wl,--gc-sections"
 
 make -j$(($(nproc)+1))
 cp src/realpath "${INSTALL_DIR}/realpath"
+cp src/df "${INSTALL_DIR}/df"
