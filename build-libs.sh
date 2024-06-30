@@ -20,6 +20,7 @@
 ./lib-scripts/libzip.sh
 ./lib-scripts/libpng.sh
 ./lib-scripts/libogg.sh
+./lib-scripts/libvorbis.sh
 ./lib-scripts/opus.sh
 ./lib-scripts/opusfile.sh
 ./lib-scripts/libmodplug.sh
