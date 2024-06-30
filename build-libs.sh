@@ -18,6 +18,7 @@
 ./lib-scripts/openssl.sh
 ./lib-scripts/libbz2.sh
 ./lib-scripts/libzip.sh
+./lib-scripts/libpng.sh
 ./lib-scripts/libogg.sh
 ./lib-scripts/opus.sh
 ./lib-scripts/opusfile.sh
