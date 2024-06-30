@@ -4,8 +4,8 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p dl/
 mkdir -p out/
 mkdir -p pkg/SDL2-2.28.1
-wget -nc https://github.com/JohnnyonFlame/SDL-fixkmsdrm/archive/refs/tags/eversdk-r1.tar.gz -O dl/SDL2-2.28.1-eversdk-r1.tar.gz || true
-tar xf dl/SDL2-2.28.1-eversdk-r1.tar.gz --strip-components=1 -C pkg/SDL2-2.28.1
+wget -nc https://github.com/JohnnyonFlame/SDL-fixkmsdrm/archive/refs/tags/eversdk-r2.tar.gz -O dl/SDL2-2.28.1-eversdk-r2.tar.gz || true
+tar xf dl/SDL2-2.28.1-eversdk-r2.tar.gz --strip-components=1 -C pkg/SDL2-2.28.1
 cd pkg/SDL2-2.28.1
 
 export WAYLAND_SCANNER="${TOOLCHAIN}/bin/wayland-scanner"
