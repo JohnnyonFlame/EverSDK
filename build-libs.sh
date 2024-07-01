@@ -23,6 +23,7 @@
 ./lib-scripts/libvorbis.sh
 ./lib-scripts/opus.sh
 ./lib-scripts/opusfile.sh
+./lib-scripts/libvpx.sh
 ./lib-scripts/libmodplug.sh
 ./lib-scripts/fluidsynth.sh
 ./lib-scripts/icu4c.sh
