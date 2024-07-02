@@ -27,6 +27,7 @@
 ./lib-scripts/libmodplug.sh
 ./lib-scripts/fluidsynth.sh
 ./lib-scripts/icu4c.sh
+./lib-scripts/libtre.sh
 ./lib-scripts/libfreetype.sh
 ./lib-scripts/wayland.sh
 ./lib-scripts/wayland-protocols.sh
