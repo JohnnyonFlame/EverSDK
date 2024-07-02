@@ -36,3 +36,5 @@
 ./lib-scripts/sdl2_image.sh
 ./lib-scripts/sdl2_mixer.sh
 ./lib-scripts/sdl2_net.sh
+./lib-scripts/sdl12-compat.sh
+./lib-scripts/sdl12-mixer.sh
