@@ -1,6 +1,6 @@
 ### What is in this repository?
 
-This repo contains a list of scripts, templates and tools to generate a working toolchain for the Evercade VS from scratch.
+This repo contains a list of scripts, templates and tools to generate a working toolchain for the Evercade, Evercade VS and Super Pocket from scratch.
 
 ### Dependencies
 
@@ -38,10 +38,14 @@ cd eversdk
 
 The `out/shell.tar.gz` package will be built once the compilation process is finished,
 that contains a series of applications and tools to allow you to remotely deploy and
-debug homebrew with ease on your Evercade VS with an EverSD.
+debug homebrew with ease on your device with an EverSD.
 
-To use this, extract the package on your EverSD, run the Shell application and you'll
-be able to ssh/scp into `root@cobalt` with the password `eversdk`.
+To use this with the VS, extract the package on your EverSD, run the Shell application
+and you'll be able to ssh/scp into `root@cobalt` with the password `eversdk`.
+
+To use this with the OG and SP, extract the package on your EverSD, run the ADB Shell
+application and you'll be able to use `adb push`, `adb pull` and `adb shell` commands
+to deploy and debug applications.
 
 ### How do I use this?
 
