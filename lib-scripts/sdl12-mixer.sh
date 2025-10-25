@@ -24,7 +24,6 @@ export LDFLAGS="-Os -flto"
 ./configure \
     --prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr" \
     --host="arm-linux-gnueabihf" \
-    --build="arm-linux-gnueabihf" \
     --enable-static \
     --enable-shared
 
