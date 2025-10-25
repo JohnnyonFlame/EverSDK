@@ -30,6 +30,6 @@ cmake -Bbuild \
 
 make -Cbuild -j$(($(nproc)+1))
 cp lib/* "${INSTALL_DIR}"
-arm-linux-gnueabihf-strip "${INSTALL_DIR}"/*
+${TOOLCHAIN}/bin/arm-linux-gnueabihf-strip "${INSTALL_DIR}"/*
 
 touch "${STAMP}" # Done
