@@ -3,14 +3,14 @@
 mkdir -p dl/
 mkdir -p pkg/
 mkdir -p stamps/
-STAMP=$(realpath "stamps/libvpx-1.14.1.tar.gz")
+STAMP=$(realpath "stamps/libvpx-1.15.2.tar.gz")
 
-[ -e "${STAMP}" ] && echo "Skipping libvpx-1.14.1.tar.gz" && exit 0
+[ -e "${STAMP}" ] && echo "Skipping libvpx-1.15.2.tar.gz" && exit 0
 
-./wget-helper.sh "libvpx-1.14.1.tar.gz" "https://chromium.googlesource.com/webm/libvpx/+archive/v1.9.0.tar.gz"
-mkdir -p pkg/libvpx-1.14.1
-tar xf dl/libvpx-1.14.1.tar.gz -C pkg/libvpx-1.14.1
-cd pkg/libvpx-1.14.1
+./wget-helper.sh "libvpx-1.15.2.tar.gz" "https://github.com/webmproject/libvpx/archive/refs/tags/v1.15.2.tar.gz"
+mkdir -p pkg/libvpx-1.15.2
+tar xf dl/libvpx-1.15.2.tar.gz --strip-components=1 -C pkg/libvpx-1.15.2
+cd pkg/libvpx-1.15.2
 
 export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
 export CC="${TOOLCHAIN}/bin/arm-linux-gnueabihf-gcc"

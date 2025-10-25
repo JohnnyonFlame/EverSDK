@@ -39,8 +39,7 @@ case "$FILE" in
     libogg-1.3.5.tar.gz)                    HASH_EXPECTED="0eb4b4b9420a0f51db142ba3f9c64b333f826532dc0f48c6410ae51f4799b664";;
     libpng-1.6.43.tar.gz)                   HASH_EXPECTED="e804e465d4b109b5ad285a8fb71f0dd3f74f0068f91ce3cdfde618180c174925";;
     libvorbis-1.3.7.tar.gz)                 HASH_EXPECTED="0e982409a9c3fc82ee06e08205b1355e5c6aa4c36bca58146ef399621b0ce5ab";;
-    libvpx-1.14.1.tar.gz)                   HASH_EXPECTED="52e073b81fb94edf2c0a94e63c59f520ca27e0d56bf7c0c9b1b0fab129e4d056";;
-    libvpx-1.9.0.tar.gz)                    HASH_EXPECTED="8797874aca5b282e7c9ba9277c4a3f81dc32037019e6545300f6f34bc669bc05";;
+    libvpx-1.15.2.tar.gz)                   HASH_EXPECTED="26fcd3db88045dee380e581862a6ef106f49b74b6396ee95c2993a260b4636aa";;
     libxkbcommon-1.0.3.tar.xz)              HASH_EXPECTED="a2202f851e072b84e64a395212cbd976ee18a8ee602008b0bad02a13247dbc52";;
     libxml2-2.9.7.tar.xz)                   HASH_EXPECTED="6437855f3332fcc0fc25323c5f06901e02277e1232a662b621dc88fde37259ac";;
     libzip-1.10.0.tar.xz)                   HASH_EXPECTED="cd2a7ac9f1fb5bfa6218272d9929955dc7237515bba6e14b5ad0e1d1e2212b43";;
