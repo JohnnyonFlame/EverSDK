@@ -27,6 +27,12 @@ export LDFLAGS="-Os -flto"
     glib_cv_stack_grows=false \
     glib_cv_uscore=false
 
+# "imp" package was deprecated long ago, and is now gone, fix it.
+sed -i "s#import sys, os, py_compile, imp#import sys, os, py_compile, importlib#" py-compile
+sed -i "s#imp\.#importlib\.#" py-compile
+sed -i "s#hasattr(imp#hasattr(importlib#" py-compile
+
+make -j$(($(nproc)+1))
 make -j$(($(nproc)+1)) install
 
 touch "${STAMP}" # Done
