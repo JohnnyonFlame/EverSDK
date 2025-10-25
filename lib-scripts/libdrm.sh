@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://dri.freedesktop.org/libdrm/libdrm-2.4.104.tar.xz -O dl/libdrm-2.4.104.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libdrm-2.4.104.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping libdrm-2.4.104.tar.xz" && exit 0
+
+./wget-helper.sh "libdrm-2.4.104.tar.xz" "https://dri.freedesktop.org/libdrm/libdrm-2.4.104.tar.xz"
 tar xf dl/libdrm-2.4.104.tar.xz -C pkg/
 cd pkg/libdrm-2.4.104
 
@@ -19,3 +24,5 @@ meson build/ \
 	--buildtype=release
 
 ninja -C build/ install
+
+touch "${STAMP}" # Done

@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/xiph/opus/releases/download/v1.1.2/opus-1.1.2.tar.gz -O dl/opus-1.1.2.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/opus-1.1.2.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping opus-1.1.2.tar.gz" && exit 0
+
+./wget-helper.sh "opus-1.1.2.tar.gz" "https://github.com/xiph/opus/releases/download/v1.1.2/opus-1.1.2.tar.gz"
 tar xf dl/opus-1.1.2.tar.gz -C pkg/
 cd pkg/opus-1.1.2
 
@@ -22,3 +27,5 @@ export LDFLAGS="-Os -flto"
     --disable-http
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

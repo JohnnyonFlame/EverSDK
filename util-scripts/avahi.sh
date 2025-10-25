@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p ${INSTALL_DIR}
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc http://avahi.org/download/avahi-0.8.tar.gz -O dl/avahi-0.8.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/avahi-0.8.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping avahi-0.8.tar.gz" && exit 0
+
+./wget-helper.sh "avahi-0.8.tar.gz" "http://avahi.org/download/avahi-0.8.tar.gz"
 tar xf dl/avahi-0.8.tar.gz -C pkg/
 cd pkg/avahi-0.8
 
@@ -44,3 +49,5 @@ export LDFLAGS="-Os -flto"
 make -j$(($(nproc)+1))
 cp avahi-daemon/avahi-daemon ${INSTALL_DIR}/avahi-daemon
 cp avahi-daemon/avahi-daemon.conf ${INSTALL_DIR}/avahi-daemon.conf
+
+touch "${STAMP}" # Done

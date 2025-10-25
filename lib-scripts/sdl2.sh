@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p dl/
 mkdir -p out/
 mkdir -p pkg/SDL2-2.28.1
-wget -nc https://github.com/JohnnyonFlame/SDL-fixkmsdrm/archive/refs/tags/eversdk-r2.tar.gz -O dl/SDL2-2.28.1-eversdk-r2.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/SDL2-2.28.1-eversdk-r2.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping SDL2-2.28.1-eversdk-r2.tar.gz" && exit 0
+
+./wget-helper.sh "SDL2-2.28.1-eversdk-r2.tar.gz" "https://github.com/JohnnyonFlame/SDL-fixkmsdrm/archive/refs/tags/eversdk-r2.tar.gz"
 tar xf dl/SDL2-2.28.1-eversdk-r2.tar.gz --strip-components=1 -C pkg/SDL2-2.28.1
 cd pkg/SDL2-2.28.1
 
@@ -34,3 +39,5 @@ make -j$(($(nproc)+1)) install
 sed 's:^exec_prefix=${prefix}:prefix="${prefix}/arm-linux-gnueabihf/sysroot/usr"\nexec_prefix=${prefix}:' sdl2-config > ${TOOLCHAIN}/bin/sdl2-config
 chmod +x ${TOOLCHAIN}/bin/sdl2-config
 cp "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/libSDL2-2.0.so.0.2800.1" "${INSTALL_DIR}/libSDL2-2.0.so.0"
+
+touch "${STAMP}" # Done

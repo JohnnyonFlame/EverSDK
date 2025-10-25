@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://www.openssl.org/source/openssl-3.2.0.tar.gz -O dl/openssl-3.2.0.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/openssl-3.2.0.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping openssl-3.2.0.tar.gz" && exit 0
+
+./wget-helper.sh "openssl-3.2.0.tar.gz" "https://www.openssl.org/source/openssl-3.2.0.tar.gz"
 tar xf dl/openssl-3.2.0.tar.gz -C pkg/
 cd pkg/openssl-3.2.0
 export CFLAGS="-Os -ffunction-sections -fdata-sections"
@@ -21,3 +26,5 @@ sed -i 's/-pthread/-lpthread/g' Configurations/10-main.conf
 make -j$(($(nproc)+1))
 make -j$(($(nproc)+1)) install
 # make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

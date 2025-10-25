@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p out/
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://ftp.gnu.org/gnu/coreutils/coreutils-9.3.tar.xz -O dl/coreutils-9.3.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/coreutils-9.3.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping coreutils-9.3.tar.xz" && exit 0
+
+./wget-helper.sh "coreutils-9.3.tar.xz" "https://ftp.gnu.org/gnu/coreutils/coreutils-9.3.tar.xz"
 tar xf dl/coreutils-9.3.tar.xz -C pkg/
 cd pkg/coreutils-9.3
 
@@ -26,3 +31,5 @@ export LDFLAGS="-Os -s -flto -Wl,--gc-sections"
 make -j$(($(nproc)+1))
 cp src/realpath "${INSTALL_DIR}/realpath"
 cp src/df "${INSTALL_DIR}/df"
+
+touch "${STAMP}" # Done

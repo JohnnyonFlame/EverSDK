@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://xkbcommon.org/download/libxkbcommon-1.0.3.tar.xz -O dl/libxkbcommon-1.0.3.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libxkbcommon-1.0.3.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping libxkbcommon-1.0.3.tar.xz" && exit 0
+
+./wget-helper.sh "libxkbcommon-1.0.3.tar.xz" "https://xkbcommon.org/download/libxkbcommon-1.0.3.tar.xz"
 tar xf dl/libxkbcommon-1.0.3.tar.xz -C pkg/
 cd pkg/libxkbcommon-1.0.3
 
@@ -23,3 +28,5 @@ meson build/ \
 	-Denable-docs=false
 
 ninja -C build/ install
+
+touch "${STAMP}" # Done

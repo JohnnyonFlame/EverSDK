@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz -O dl/util-linux-2.36.2.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/util-linux-2.36.2.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping util-linux-2.36.2.tar.xz" && exit 0
+
+./wget-helper.sh "util-linux-2.36.2.tar.xz" "https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.2.tar.xz"
 tar xf dl/util-linux-2.36.2.tar.xz -C pkg/
 cd pkg/util-linux-2.36.2
 
@@ -20,3 +25,5 @@ export LDFLAGS="-Os -flto"
 	--enable-libmount
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

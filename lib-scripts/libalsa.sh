@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2 -O dl/alsa-lib-1.2.4.tar.bz2 || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/alsa-lib-1.2.4.tar.bz2")
+
+[ -e "${STAMP}" ] && echo "Skipping alsa-lib-1.2.4.tar.bz2" && exit 0
+
+./wget-helper.sh "alsa-lib-1.2.4.tar.bz2" "https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2"
 tar xf dl/alsa-lib-1.2.4.tar.bz2 -C pkg/
 cd pkg/alsa-lib-1.2.4
 
@@ -19,3 +24,5 @@ export LDFLAGS="-Os -flto"
 	--enable-shared
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

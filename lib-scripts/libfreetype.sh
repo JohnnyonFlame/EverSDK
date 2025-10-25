@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://download.savannah.gnu.org/releases/freetype/freetype-2.12.1.tar.xz -O dl/freetype-2.12.1.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/freetype-2.12.1.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping freetype-2.12.1.tar.xz" && exit 0
+
+./wget-helper.sh "freetype-2.12.1.tar.xz" "https://download.savannah.gnu.org/releases/freetype/freetype-2.12.1.tar.xz"
 tar xf dl/freetype-2.12.1.tar.xz -C pkg/
 cd pkg/freetype-2.12.1
 
@@ -28,3 +33,5 @@ meson build/ \
 	--buildtype=release
 
 ninja -C build/ install
+
+touch "${STAMP}" # Done

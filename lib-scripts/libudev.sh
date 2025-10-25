@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://www.freedesktop.org/software/systemd/systemd-220.tar.xz -O dl/systemd-220.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/systemd-220.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping systemd-220.tar.xz" && exit 0
+
+./wget-helper.sh "systemd-220.tar.xz" "https://www.freedesktop.org/software/systemd/systemd-220.tar.xz"
 rm -rf pkg/systemd-220
 tar xf dl/systemd-220.tar.xz -C pkg/
 cd pkg/systemd-220
@@ -48,3 +53,5 @@ cp src/libudev/libudev.pc "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgc
 cp .libs/libudev.so "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib"
 cp .libs/libudev.so.1 "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib"
 cp .libs/libudev.so.1.6.3 "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib"
+
+touch "${STAMP}" # Done

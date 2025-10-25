@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://tukaani.org/xz/xz-5.4.3.tar.xz -O dl/xz-5.4.3.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/xz-5.4.3.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping xz-5.4.3.tar.xz" && exit 0
+
+./wget-helper.sh "xz-5.4.3.tar.xz" "https://tukaani.org/xz/xz-5.4.3.tar.xz"
 tar xf dl/xz-5.4.3.tar.xz -C pkg/
 cd pkg/xz-5.4.3
 
@@ -18,3 +23,5 @@ export LDFLAGS="-Os -flto"
 	--enable-static
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

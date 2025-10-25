@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out/gl4es
 mkdir -p dl/
 mkdir -p pkg/
 mkdir -p "${INSTALL_DIR}"
-wget -nc https://github.com/ptitSeb/gl4es/archive/refs/tags/v1.1.6.tar.gz -O dl/gl4es-1.1.6.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/gl4es-1.1.6.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping gl4es-1.1.6.tar.gz" && exit 0
+
+./wget-helper.sh "gl4es-1.1.6.tar.gz" "https://github.com/ptitSeb/gl4es/archive/refs/tags/v1.1.6.tar.gz"
 tar xf dl/gl4es-1.1.6.tar.gz -C pkg/
 cd pkg/gl4es-1.1.6
 
@@ -26,3 +31,5 @@ cmake -Bbuild \
 make -Cbuild -j$(($(nproc)+1))
 cp lib/* "${INSTALL_DIR}"
 arm-linux-gnueabihf-strip "${INSTALL_DIR}"/*
+
+touch "${STAMP}" # Done

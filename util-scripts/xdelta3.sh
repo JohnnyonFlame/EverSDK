@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p out/
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/jmacd/xdelta/archive/refs/tags/v3.1.0.tar.gz -O dl/xdelta3-3.1.0.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/xdelta3-3.1.0.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping xdelta3-3.1.0.tar.gz" && exit 0
+
+./wget-helper.sh "xdelta3-3.1.0.tar.gz" "https://github.com/jmacd/xdelta/archive/refs/tags/v3.1.0.tar.gz"
 tar xf dl/xdelta3-3.1.0.tar.gz -C pkg/
 cd pkg/xdelta-3.1.0/xdelta3
 
@@ -25,3 +30,5 @@ autoreconf -i
 sed -i 's#-llzma#-l:liblzma.a#g' Makefile
 make -j$(($(nproc)+1))
 cp xdelta3 ${INSTALL_DIR}/xdelta3
+
+touch "${STAMP}" # Done

@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p ${INSTALL_DIR}
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/troglobit/mdnsd/releases/download/v0.12/mdnsd-0.12.tar.gz -O dl/mdnsd-0.12.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/mdnsd-0.12.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping mdnsd-0.12.tar.gz" && exit 0
+
+./wget-helper.sh "mdnsd-0.12.tar.gz" "https://github.com/troglobit/mdnsd/releases/download/v0.12/mdnsd-0.12.tar.gz"
 tar xf dl/mdnsd-0.12.tar.gz -C pkg/
 cd pkg/mdnsd-0.12
 
@@ -26,3 +31,5 @@ export LDFLAGS="-Os -s -flto"
 
 make -j$(($(nproc)+1))
 cp src/mdnsd ${INSTALL_DIR}
+
+touch "${STAMP}" # Done

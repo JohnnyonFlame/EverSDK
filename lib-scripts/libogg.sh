@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.tar.gz -O dl/libogg-1.3.5.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libogg-1.3.5.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping libogg-1.3.5.tar.gz" && exit 0
+
+./wget-helper.sh "libogg-1.3.5.tar.gz" "https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.tar.gz"
 tar xf dl/libogg-1.3.5.tar.gz -C pkg/
 cd pkg/libogg-1.3.5
 
@@ -22,3 +27,5 @@ export LDFLAGS="-Os -flto"
     --disable-http
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://chromium.googlesource.com/webm/libvpx/+archive/v1.9.0.tar.gz -O dl/libvpx-1.14.1.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libvpx-1.14.1.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping libvpx-1.14.1.tar.gz" && exit 0
+
+./wget-helper.sh "libvpx-1.14.1.tar.gz" "https://chromium.googlesource.com/webm/libvpx/+archive/v1.9.0.tar.gz"
 mkdir -p pkg/libvpx-1.14.1
 tar xf dl/libvpx-1.14.1.tar.gz -C pkg/libvpx-1.14.1
 cd pkg/libvpx-1.14.1
@@ -26,3 +31,5 @@ export LDFLAGS="-Os -flto"
     --enable-small
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

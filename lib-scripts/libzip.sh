@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p out/
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://libzip.org/download/libzip-1.10.0.tar.xz -O dl/libzip-1.10.0.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libzip-1.10.0.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping libzip-1.10.0.tar.xz" && exit 0
+
+./wget-helper.sh "libzip-1.10.0.tar.xz" "https://libzip.org/download/libzip-1.10.0.tar.xz"
 tar xf dl/libzip-1.10.0.tar.xz -C pkg/
 cd pkg/libzip-1.10.0
 
@@ -34,3 +39,5 @@ cmake -Bbuild \
 
 make -Cbuild -j$(($(nproc)+1)) install
 cp "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/libzip.so.5.5" ${INSTALL_DIR}/libzip.so.5.5
+
+touch "${STAMP}" # Done

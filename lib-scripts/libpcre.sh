@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://sourceforge.net/projects/pcre/files/pcre/8.41/pcre-8.41.tar.bz2 -O dl/pcre-8.41.tar.bz2 || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/pcre-8.41.tar.bz2")
+
+[ -e "${STAMP}" ] && echo "Skipping pcre-8.41.tar.bz2" && exit 0
+
+./wget-helper.sh "pcre-8.41.tar.bz2" "https://sourceforge.net/projects/pcre/files/pcre/8.41/pcre-8.41.tar.bz2"
 tar xf dl/pcre-8.41.tar.bz2 -C pkg/
 cd pkg/pcre-8.41
 
@@ -24,3 +29,5 @@ export LDFLAGS="-Os -flto"
     --enable-shared
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

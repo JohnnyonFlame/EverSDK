@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://download.gnome.org/sources/libxml2/2.9/libxml2-2.9.7.tar.xz -O dl/libxml2-2.9.7.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libxml2-2.9.7.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping libxml2-2.9.7.tar.xz" && exit 0
+
+./wget-helper.sh "libxml2-2.9.7.tar.xz" "https://download.gnome.org/sources/libxml2/2.9/libxml2-2.9.7.tar.xz"
 tar xf dl/libxml2-2.9.7.tar.xz -C pkg/
 cd pkg/libxml2-2.9.7
 
@@ -19,3 +24,5 @@ export LDFLAGS="-Os -flto"
 	--host="arm-linux-gnueabihf"
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

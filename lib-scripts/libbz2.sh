@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p dl/
 mkdir -p pkg/
 mkdir -p out/
-wget -nc https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz -O dl/bzip2-1.0.8.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/bzip2-1.0.8.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping bzip2-1.0.8.tar.gz" && exit 0
+
+./wget-helper.sh "bzip2-1.0.8.tar.gz" "https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz"
 tar xf dl/bzip2-1.0.8.tar.gz -C pkg/
 cd pkg/bzip2-1.0.8
 
@@ -22,3 +27,5 @@ sed -i 's#RANLIB=ranlib#RANLIB="$${TOOLCHAIN}/bin/arm-linux-gnueabihf-ranlib"#g'
 sed -i 's#PREFIX=/usr/local#PREFIX="$${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr"#g' Makefile.eversdk
 
 make -f Makefile.eversdk -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

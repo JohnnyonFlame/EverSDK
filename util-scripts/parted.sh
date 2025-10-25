@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p out/
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://ftp.gnu.org/gnu/parted/parted-3.6.tar.xz -O dl/parted-3.6.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/parted-3.6.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping parted-3.6.tar.xz" && exit 0
+
+./wget-helper.sh "parted-3.6.tar.xz" "https://ftp.gnu.org/gnu/parted/parted-3.6.tar.xz"
 tar xf dl/parted-3.6.tar.xz -C pkg/
 cp util-scripts/0001-parted.patch pkg/parted-3.6/
 cd pkg/parted-3.6
@@ -25,3 +30,5 @@ patch -p2 < 0001-parted.patch
 
 make -j$(($(nproc)+1))
 cp pkg/parted-3.6/partprobe/partprobe ${INSTALL_DIR}/partprobe
+
+touch "${STAMP}" # Done

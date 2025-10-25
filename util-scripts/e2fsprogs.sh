@@ -3,7 +3,12 @@
 mkdir -p dl/
 mkdir -p pkg/
 mkdir -p ${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/etc/cron.d/
-wget -nc https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.0/e2fsprogs-1.47.0.tar.gz -O dl/e2fsprogs-1.47.0.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/e2fsprogs-1.47.0.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping e2fsprogs-1.47.0.tar.gz" && exit 0
+
+./wget-helper.sh "e2fsprogs-1.47.0.tar.gz" "https://mirrors.edge.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.47.0/e2fsprogs-1.47.0.tar.gz"
 tar xf dl/e2fsprogs-1.47.0.tar.gz -C pkg/
 cd pkg/e2fsprogs-1.47.0
 
@@ -22,3 +27,5 @@ export LDFLAGS="-Os -flto"
 
 make -j$(($(nproc)+1))
 make install
+
+touch "${STAMP}" # Done

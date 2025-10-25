@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/libcap-2.49.tar.gz -O dl/libcap-2.49.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libcap-2.49.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping libcap-2.49.tar.gz" && exit 0
+
+./wget-helper.sh "libcap-2.49.tar.gz" "https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/libcap-2.49.tar.gz"
 tar xf dl/libcap-2.49.tar.gz -C pkg/
 cd pkg/libcap-2.49
 
@@ -29,3 +34,5 @@ make -C libcap \
     lib=lib \
     prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr" \
     -j$(($(nproc) + 1)) install
+
+touch "${STAMP}" # Done

@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p ${INSTALL_DIR}
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/stedolan/jq/releases/download/jq-1.6/jq-1.6.tar.gz -O dl/jq-1.6.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/jq-1.6.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping jq-1.6.tar.gz" && exit 0
+
+./wget-helper.sh "jq-1.6.tar.gz" "https://github.com/stedolan/jq/releases/download/jq-1.6/jq-1.6.tar.gz"
 tar xf dl/jq-1.6.tar.gz -C pkg/
 cd pkg/jq-1.6
 
@@ -24,3 +29,5 @@ autoreconf -fi
 make -j$(($(nproc)+1))
 cp jq "${INSTALL_DIR}/jq"
 ${TOOLCHAIN}/bin/arm-linux-gnueabihf-strip -s "${INSTALL_DIR}/jq"
+
+touch "${STAMP}" # Done

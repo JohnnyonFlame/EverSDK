@@ -2,12 +2,17 @@
 
 mkdir -p dl/
 mkdir -p pkg/host pkg/target
-wget -nc https://wayland.freedesktop.org/releases/wayland-1.14.0.tar.xz -O dl/wayland-1.14.0.tar.xz || true
-tar xf dl/wayland-1.14.0.tar.xz -C pkg/host
-tar xf dl/wayland-1.14.0.tar.xz -C pkg/target
+mkdir -p stamps/
+STAMP=$(realpath "stamps/wayland-1.18.0.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping wayland-1.18.0.tar.xz" && exit 0
+
+./wget-helper.sh "wayland-1.18.0.tar.xz" "https://wayland.freedesktop.org/releases/wayland-1.18.0.tar.xz"
+tar xf dl/wayland-1.18.0.tar.xz -C pkg/host
+tar xf dl/wayland-1.18.0.tar.xz -C pkg/target
 
 (
-    cd pkg/host/wayland-1.14.0
+    cd pkg/host/wayland-1.18.0
 
     ./configure \
         --prefix="${TOOLCHAIN}" \
@@ -21,7 +26,7 @@ tar xf dl/wayland-1.14.0.tar.xz -C pkg/target
 )
 
 (
-    cd pkg/target/wayland-1.14.0
+    cd pkg/target/wayland-1.18.0
     
 	export PATH="${TOOLCHAIN}/bin/:$PATH"
     export PKG_CONFIG="${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config"
@@ -47,3 +52,5 @@ tar xf dl/wayland-1.14.0.tar.xz -C pkg/target
 cp templates/wayland-egl.pc ${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/wayland-egl.pc
 sed -i "s#TOOLCHAIN_PATH#${TOOLCHAIN}#" ${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/wayland-egl.pc
 sed -i "s#exec_prefix=\${prefix}#exec_prefix=${TOOLCHAIN}#" ${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/wayland-scanner.pc
+
+touch "${STAMP}" # Done

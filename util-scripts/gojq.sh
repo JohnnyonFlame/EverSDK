@@ -5,7 +5,12 @@ mkdir -p dl/
 mkdir -p out/
 mkdir -p pkg/
 
-wget -nc http://deb.debian.org/debian/pool/main/g/gojq/gojq_0.12.11.orig.tar.gz -O dl/gojq_0.12.11.orig.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/gojq_0.12.11.orig.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping gojq_0.12.11.orig.tar.gz" && exit 0
+
+./wget-helper.sh "gojq_0.12.11.orig.tar.gz" "http://deb.debian.org/debian/pool/main/g/gojq/gojq_0.12.11.orig.tar.gz"
 tar xf dl/gojq_0.12.11.orig.tar.gz -C pkg/
 cd pkg/gojq-0.12.11
 
@@ -18,3 +23,5 @@ export GOARCH=arm
 
 go build -ldflags="-w -s" -gcflags=all="-l -B -wb=false" -buildmode=pie -o gojq ./cmd/gojq/
 cp gojq ${INSTALL_DIR}/gojq
+
+touch "${STAMP}" # Done

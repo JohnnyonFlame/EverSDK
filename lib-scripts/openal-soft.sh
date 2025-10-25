@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p dl/
 mkdir -p pkg/
 mkdir -p out/
-wget -nc https://openal-soft.org/openal-releases/openal-soft-1.23.1.tar.bz2 -O dl/openal-soft-1.23.1.tar.bz2 || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/openal-soft-1.23.1.tar.bz2")
+
+[ -e "${STAMP}" ] && echo "Skipping openal-soft-1.23.1.tar.bz2" && exit 0
+
+./wget-helper.sh "openal-soft-1.23.1.tar.bz2" "https://github.com/kcat/openal-soft/releases/download/1.23.1/openal-soft-1.23.1.tar.bz2"
 tar xf dl/openal-soft-1.23.1.tar.bz2 -C pkg/
 cd pkg/openal-soft-1.23.1
 
@@ -22,3 +27,5 @@ cmake -Bbuild \
 
 make -Cbuild -j$(($(nproc)+1)) install
 cp "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/libopenal.so.1.23.1" "$INSTALL_DIR/libopenal.so.1"
+
+touch "${STAMP}" # Done

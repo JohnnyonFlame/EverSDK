@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://sourceforge.net/projects/modplug-xmms/files/libmodplug/0.8.9.0/libmodplug-0.8.9.0.tar.gz -O dl/libmodplug-0.8.9.0.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libmodplug-0.8.9.0.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping libmodplug-0.8.9.0.tar.gz" && exit 0
+
+./wget-helper.sh "libmodplug-0.8.9.0.tar.gz" "https://sourceforge.net/projects/modplug-xmms/files/libmodplug/0.8.9.0/libmodplug-0.8.9.0.tar.gz"
 tar xf dl/libmodplug-0.8.9.0.tar.gz -C pkg/
 cd pkg/libmodplug-0.8.9.0
 
@@ -21,3 +26,5 @@ export LDFLAGS="-Os -flto"
 
 make clean
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

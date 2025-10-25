@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/{host,target}
-wget -nc https://github.com/unicode-org/icu/releases/download/release-71-1/icu4c-71_1-src.tgz -O dl/icu4c-71_1-src.tgz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/icu4c-71_1-src.tgz")
+
+[ -e "${STAMP}" ] && echo "Skipping icu4c-71_1-src.tgz" && exit 0
+
+./wget-helper.sh "icu4c-71_1-src.tgz" "https://github.com/unicode-org/icu/releases/download/release-71-1/icu4c-71_1-src.tgz"
 tar xf dl/icu4c-71_1-src.tgz -C pkg/host
 tar xf dl/icu4c-71_1-src.tgz -C pkg/target
 WITH_CROSS_BUILD=$(realpath "pkg/host/icu/source")
@@ -49,3 +54,5 @@ WITH_CROSS_BUILD=$(realpath "pkg/host/icu/source")
     make clean
     make -j$(($(nproc)+1)) install
 )
+
+touch "${STAMP}" # Done

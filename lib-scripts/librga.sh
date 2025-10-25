@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/linux-rga
-wget -nc https://github.com/JohnnyonFlame/linux-rga/archive/refs/tags/eversdk-rga.tar.gz -O dl/eversdk-rga.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/eversdk-rga.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping eversdk-rga.tar.gz" && exit 0
+
+./wget-helper.sh "eversdk-rga.tar.gz" "https://github.com/JohnnyonFlame/linux-rga/archive/refs/tags/eversdk-rga.tar.gz"
 tar xf dl/eversdk-rga.tar.gz --strip-components=1 -C pkg/linux-rga
 cd pkg/linux-rga
 
@@ -20,3 +25,5 @@ meson build/ \
     -Dlibdrm=false
 
 ninja -C build/ install
+
+touch "${STAMP}" # Done

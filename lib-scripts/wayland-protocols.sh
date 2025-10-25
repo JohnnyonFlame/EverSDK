@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://wayland.freedesktop.org/releases/wayland-protocols-1.18.tar.xz -O dl/wayland-protocols-1.18.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/wayland-protocols-1.18.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping wayland-protocols-1.18.tar.xz" && exit 0
+
+./wget-helper.sh "wayland-protocols-1.18.tar.xz" "https://wayland.freedesktop.org/releases/wayland-protocols-1.18.tar.xz"
 tar xf dl/wayland-protocols-1.18.tar.xz -C pkg/
 cd pkg/wayland-protocols-1.18
 
@@ -17,3 +22,5 @@ export LDFLAGS="-Os -flto"
     --prefix="${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr"
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p dl/
 mkdir -p pkg/
 mkdir -p out/
-wget -nc http://laurikari.net/tre/tre-0.8.0.tar.gz -O dl/tre-0.8.0.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/tre-0.8.0.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping tre-0.8.0.tar.gz" && exit 0
+
+./wget-helper.sh "tre-0.8.0.tar.gz" "http://laurikari.net/tre/tre-0.8.0.tar.gz"
 tar xf dl/tre-0.8.0.tar.gz -C pkg/
 cd pkg/tre-0.8.0
 
@@ -23,3 +28,5 @@ export LDFLAGS="-Os -flto"
 
 make -j$(($(nproc)+1)) install
 cp "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/libtre.so.5.0.0" "${INSTALL_DIR}/libtre.so.5"
+
+touch "${STAMP}" # Done

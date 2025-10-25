@@ -4,7 +4,12 @@ WSI=wayland
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/JohnnyonFlame/libmali-jelos/archive/refs/heads/main.tar.gz -O dl/libmali.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libmali.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping libmali.tar.gz" && exit 0
+
+./wget-helper.sh "libmali.tar.gz" "https://github.com/JohnnyonFlame/libmali-jelos/archive/refs/heads/main.tar.gz"
 export FILES=("libmali-jelos-main/include" libmali-jelos-main/lib/arm-linux-gnueabihf/libmali-${MALI_VERSION}-${WSI}.so)
 tar -C pkg/ -zxf dl/libmali.tar.gz "${FILES[@]}"
 
@@ -36,3 +41,5 @@ cp templates/{egl.pc,gbm.pc} ${PREFIX}/lib/pkgconfig
 sed -i "s#TOOLCHAIN_PATH#${TOOLCHAIN}#" ${PREFIX}/lib/pkgconfig/egl.pc
 sed -i "s#TOOLCHAIN_PATH#${TOOLCHAIN}#" ${PREFIX}/lib/pkgconfig/gbm.pc
 sed -i "s#VERSION#22.0.0-${VERSION}#" ${PREFIX}/lib/pkgconfig/gbm.pc
+
+touch "${STAMP}" # Done

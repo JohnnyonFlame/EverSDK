@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc http://0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz -O dl/libdaemon-0.14.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libdaemon-0.14.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping libdaemon-0.14.tar.gz" && exit 0
+
+./wget-helper.sh "libdaemon-0.14.tar.gz" "http://0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz"
 tar xf dl/libdaemon-0.14.tar.gz -C pkg/
 cp pkg/crosstool-ng-*/scripts/config.sub pkg/libdaemon-0.14/config.sub
 cp pkg/crosstool-ng-*/scripts/config.guess pkg/libdaemon-0.14/config.guess
@@ -23,3 +28,5 @@ export LDFLAGS="-Os -flto"
     ac_cv_func_setpgrp_void=true
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

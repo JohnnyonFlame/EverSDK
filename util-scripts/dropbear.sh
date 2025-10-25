@@ -8,7 +8,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p ${INSTALL_DIR}
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://matt.ucc.asn.au/dropbear/releases/dropbear-2022.83.tar.bz2 -O dl/dropbear-2022.83.tar.bz2 || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/dropbear-2022.83.tar.bz2")
+
+[ -e "${STAMP}" ] && echo "Skipping dropbear-2022.83.tar.bz2" && exit 0
+
+./wget-helper.sh "dropbear-2022.83.tar.bz2" "https://matt.ucc.asn.au/dropbear/releases/dropbear-2022.83.tar.bz2"
 tar xf dl/dropbear-2022.83.tar.bz2 -C pkg/
 cd pkg/dropbear-2022.83
 
@@ -32,3 +37,5 @@ sed -i 's/ses.authstate.pw_passwd = m_strdup(passwd_crypt);/ses.authstate.pw_pas
 
 make -j$(($(nproc)+1)) PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" MULTI=1
 cp dropbearmulti "${INSTALL_DIR}/"
+
+touch "${STAMP}" # Done

@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.gz -O dl/libvorbis-1.3.7.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libvorbis-1.3.7.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping libvorbis-1.3.7.tar.gz" && exit 0
+
+./wget-helper.sh "libvorbis-1.3.7.tar.gz" "https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.tar.gz"
 tar xf dl/libvorbis-1.3.7.tar.gz -C pkg/
 cd pkg/libvorbis-1.3.7
 
@@ -22,3 +27,5 @@ export LDFLAGS="-Os -flto"
     --disable-http
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

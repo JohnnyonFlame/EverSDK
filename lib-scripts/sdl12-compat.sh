@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p dl/
 mkdir -p pkg/
 mkdir -p out/
-wget -nc https://github.com/libsdl-org/sdl12-compat/archive/refs/tags/release-1.2.68.tar.gz -O dl/sdl12-compat-release-1.2.68.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/sdl12-compat-release-1.2.68.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping sdl12-compat-release-1.2.68.tar.gz" && exit 0
+
+./wget-helper.sh "sdl12-compat-release-1.2.68.tar.gz" "https://github.com/libsdl-org/sdl12-compat/archive/refs/tags/release-1.2.68.tar.gz"
 tar xf dl/sdl12-compat-release-1.2.68.tar.gz -C pkg/
 cd pkg/sdl12-compat-release-1.2.68   
 
@@ -25,3 +30,5 @@ cp "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/libSDL-1.2.so.1.2.68" "$INS
 cp "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/bin/sdl-config" "${TOOLCHAIN}/bin/sdl-config" 
 cp "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/sdl12_compat.pc" "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/pkgconfig/sdl.pc"
 chmod +x ${TOOLCHAIN}/bin/sdl-config
+
+touch "${STAMP}" # Done

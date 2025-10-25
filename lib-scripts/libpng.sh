@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p out/
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://download.sourceforge.net/libpng/libpng-1.6.43.tar.gz -O dl/libpng-1.6.43.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libpng-1.6.43.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping libpng-1.6.43.tar.gz" && exit 0
+
+./wget-helper.sh "libpng-1.6.43.tar.gz" "https://download.sourceforge.net/libpng/libpng-1.6.43.tar.gz"
 tar xf dl/libpng-1.6.43.tar.gz -C pkg/
 cd pkg/libpng-1.6.43
 
@@ -24,3 +29,4 @@ export LDFLAGS="-Os -flto"
 make clean
 make -j$(($(nproc)+1)) install
 
+touch "${STAMP}" # Done

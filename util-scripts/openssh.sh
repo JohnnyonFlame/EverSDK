@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p ${INSTALL_DIR}
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/openssh/openssh-portable/archive/refs/tags/V_9_5_P1.tar.gz -O dl/openssh-V_9_5_P1.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/openssh-V_9_5_P1.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping openssh-V_9_5_P1.tar.gz" && exit 0
+
+./wget-helper.sh "openssh-V_9_5_P1.tar.gz" "https://github.com/openssh/openssh-portable/archive/refs/tags/V_9_5_P1.tar.gz"
 tar xf dl/openssh-V_9_5_P1.tar.gz -C pkg/
 cd pkg/openssh-portable-V_9_5_P1
 
@@ -29,3 +34,5 @@ autoreconf
 
 make -j$(($(nproc)+1)) sftp-server
 cp sftp-server "${INSTALL_DIR}/"
+
+touch "${STAMP}" # Done

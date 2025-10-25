@@ -2,7 +2,12 @@
 
 mkdir -p dl
 mkdir -p pkg
-wget -nc https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.2.tar.gz -O dl/pkg-config-0.29.2.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/pkg-config-0.29.2.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping pkg-config-0.29.2.tar.gz" && exit 0
+
+./wget-helper.sh "pkg-config-0.29.2.tar.gz" "https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.2.tar.gz"
 tar xf dl/pkg-config-0.29.2.tar.gz -C pkg/
 cd pkg/pkg-config-0.29.2
 
@@ -13,3 +18,5 @@ cd pkg/pkg-config-0.29.2
 
 make -j$(($(nproc)+1)) install
 ln -sf ${TOOLCHAIN}/bin/pkg-config ${TOOLCHAIN}/bin/arm-linux-gnueabihf-pkg-config 
+
+touch "${STAMP}" # Done

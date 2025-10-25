@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p out/
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/libsdl-org/SDL_image/releases/download/release-2.6.2/SDL2_image-2.6.2.tar.gz -O dl/SDL2_image-2.6.2.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/SDL2_image-2.6.2.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping SDL2_image-2.6.2.tar.gz" && exit 0
+
+./wget-helper.sh "SDL2_image-2.6.2.tar.gz" "https://github.com/libsdl-org/SDL_image/releases/download/release-2.6.2/SDL2_image-2.6.2.tar.gz"
 tar xf dl/SDL2_image-2.6.2.tar.gz -C pkg/
 cd pkg/SDL2_image-2.6.2
 
@@ -24,3 +29,5 @@ export LDFLAGS="-Os -flto"
 make clean
 make -j$(($(nproc)+1)) install
 cp "${TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/libSDL2_image-2.0.so.0.600.2" "${INSTALL_DIR}/libSDL2_image-2.0.so.0"
+
+touch "${STAMP}" # Done

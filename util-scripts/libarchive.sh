@@ -4,7 +4,12 @@ INSTALL_DIR=$(pwd)/out
 mkdir -p out/
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://www.libarchive.org/downloads/libarchive-3.6.2.tar.xz -O dl/libarchive-3.6.2.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/libarchive-3.6.2.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping libarchive-3.6.2.tar.xz" && exit 0
+
+./wget-helper.sh "libarchive-3.6.2.tar.xz" "https://www.libarchive.org/downloads/libarchive-3.6.2.tar.xz"
 tar xf dl/libarchive-3.6.2.tar.xz -C pkg/
 
 cp util-scripts/libarchive-no-paranoid.patch pkg/libarchive-3.6.2/libarchive-no-paranoid.patch
@@ -38,3 +43,5 @@ sed -i 's#-llzma#-l:liblzma.a#g' configure
 
 make -j$(($(nproc)+1))
 cp bsdtar ${INSTALL_DIR}/bsdtar
+
+touch "${STAMP}" # Done

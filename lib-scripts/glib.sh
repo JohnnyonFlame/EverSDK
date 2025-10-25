@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://download.gnome.org/sources/glib/2.54/glib-2.54.2.tar.xz -O dl/glib-2.54.2.tar.xz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/glib-2.54.2.tar.xz")
+
+[ -e "${STAMP}" ] && echo "Skipping glib-2.54.2.tar.xz" && exit 0
+
+./wget-helper.sh "glib-2.54.2.tar.xz" "https://download.gnome.org/sources/glib/2.54/glib-2.54.2.tar.xz"
 tar xf dl/glib-2.54.2.tar.xz -C pkg/
 cd pkg/glib-2.54.2
 
@@ -23,3 +28,5 @@ export LDFLAGS="-Os -flto"
     glib_cv_uscore=false
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

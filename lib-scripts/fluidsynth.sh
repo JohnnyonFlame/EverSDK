@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/FluidSynth/fluidsynth/archive/refs/tags/v2.3.1.tar.gz -O dl/fluidsynth-v2.3.1.tar.gz || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/fluidsynth-v2.3.1.tar.gz")
+
+[ -e "${STAMP}" ] && echo "Skipping fluidsynth-v2.3.1.tar.gz" && exit 0
+
+./wget-helper.sh "fluidsynth-v2.3.1.tar.gz" "https://github.com/FluidSynth/fluidsynth/archive/refs/tags/v2.3.1.tar.gz"
 tar xf dl/fluidsynth-v2.3.1.tar.gz -C pkg/
 cd pkg/fluidsynth-2.3.1
 
@@ -24,3 +29,5 @@ cmake -Bbuild \
     -Denable-jack=0
 
 make -Cbuild -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done

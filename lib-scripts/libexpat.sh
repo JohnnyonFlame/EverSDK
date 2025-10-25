@@ -2,7 +2,12 @@
 
 mkdir -p dl/
 mkdir -p pkg/
-wget -nc https://github.com/libexpat/libexpat/releases/download/R_2_2_5/expat-2.2.5.tar.bz2 -O dl/expat-2.2.5.tar.bz2 || true
+mkdir -p stamps/
+STAMP=$(realpath "stamps/expat-2.2.5.tar.bz2")
+
+[ -e "${STAMP}" ] && echo "Skipping expat-2.2.5.tar.bz2" && exit 0
+
+./wget-helper.sh "expat-2.2.5.tar.bz2" "https://github.com/libexpat/libexpat/releases/download/R_2_2_5/expat-2.2.5.tar.bz2"
 tar xf dl/expat-2.2.5.tar.bz2 -C pkg/
 cd pkg/expat-2.2.5
 
@@ -19,3 +24,5 @@ export LDFLAGS="-Os -flto"
 	--enable-shared
 
 make -j$(($(nproc)+1)) install
+
+touch "${STAMP}" # Done
